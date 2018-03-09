@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+var daoyi_ajax="{:U('Index/daoyi_ajax')}";
+var fenzhen_ajax="{:U('Index/fenzhen_ajax')}";
+var xiangqing_ajax="{:U('Index/xiangqing_ajax')}";
+var daoyisearch_ajax="{:U('Index/daoyisearch_ajax')}";
+var kfeditsubmit_ajax="{:U('Index/kfeditsubmit_ajax')}";
+</script>
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper"> <include file="Public:position" />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <p>系统操作说明</p>
+              <p>1、<span style="color: red;">查询：</span>患者来院时，向患者询问<span style="color: red;">预约号</span>或<span style="color: red;">姓名</span>或<span style="color: red;">联系电话</span>供查询患者的预约信息，点详细情况可查看患者全部信息。</p>
+              <p>2、<span style="color: red;">分诊：</span>点击分诊，指定患者的主治医生。</p>
+            </div>
+            <div class="panel-body">
+              <form class="form-horizontal" role="form" onsubmit="return false;">
+                <div class="row">
+                  <div class="col-md-10 col-md-offset-2">
+                    <div class="form-group pd-0">
+                      <label class="control-label">预约号：</label>
+                      <div class="input-text col-md-2">
+                        <input type="text" class="form-control input-sm" id="yuyue" name="yuyue">
+                      </div>
+                      <label class="input-text control-label">姓名：</label>
+                      <div class="input-text  col-md-2">
+                        <input type="text" class="form-control input-sm" id="username" name="username">
+                      </div>
+                      <label class="input-text control-label">电话：</label>
+                      <div class="input-text  col-md-2">
+                        <input type="text" class="form-control input-sm" id="phone" name="phone">
+                      </div>
+                      <div class="col-md-2 pd-top-10"> <a class="btn btn-primary btn-sm col-md-5 col-sm-12 col-xs-12 btn-block" id="daoyi_btns">搜索</a> </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="orderby" name="orderby" value="id"/>
+                <input type="hidden" id="orderway" name="orderway" value="desc"/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" >
+            	 <include file="Public:thead" />
+            	 <tbody id="ajax"></tbody>
+            </table>
+          </div>
+          <div id="pageNavs" class="pageNavcommon"></div>
+          <div id="pageNavs_sousuo" class="pageNavcommon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/Public/js/jquery.js"></script> 
+<script src="/Public/js/bootstrap.js"></script> 
+<script src="/Public/js/metisMenu.js"></script> 
+<script src="/Public/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/daoyi_fenye.js"></script> 
+<script src="__PUBLIC__/js/daoyi_search.js"></script> 
+<script src="__PUBLIC__/js/tanchuang.js"></script>
+<script>
+	var th = '<th name="age" class="orderclick">年龄&nbsp;&nbsp;<i class="fa "></i></th>;'
+	$('thead th[name=sex]').after(th)
+	$('thead th[name=area]').css('display','none');
+	$('thead th[name=consult]').css('display','none');
+	$('thead th[name=source_web]').css('display','none');
+	$('thead th[name=info_channel]').css('display','none');
+	$('thead th[name=isorder]').css('display','none');
+	$('thead th[name=huifang]').css('display','none');
+</script>
+</body>
+</html>

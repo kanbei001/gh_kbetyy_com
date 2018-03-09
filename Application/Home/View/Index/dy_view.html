@@ -1,0 +1,86 @@
+<style>
+    .modal-dialog {width: 600px;margin-top: 50px !important;} 
+</style>
+  
+	<div class='modal-body'>
+		<div class='table-responsive'>
+			<table class='table table-bordered table-hover'>
+				<thead>
+					<tr>
+					<td colspan='3' class='left'> <strong>客户基本信息</strong> </td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class='left'><strong>预约号：</strong>{$yuyue}</td>
+						<td class='left'><strong>姓名：</strong>{$username}</td>
+						<td class='left'><strong>登记时间：</strong>{$in_time}</td>
+					</tr>
+					<tr>
+						<td class='left'><strong>电　话：</strong>{$phone}</td>
+						<td class='left'><strong>地区：</strong>{$area}</td>
+						<td class='left'><strong>QQ：</strong>{$qq}</td>
+					</tr>
+					<tr>
+						<td class='left'><strong>性　别：</strong>{$sex}</td>
+						<td class='left'><strong>年龄：</strong>{$age}</td>
+						<td class='left'><strong>是否来院：</strong>{$laiyuan}</td>
+					</tr>
+					<tr>
+						<td class='left'><strong>来院时间：</strong>{$laiyuan_time}</td>
+						<td class='left'><strong>关键词：</strong>{$keyword}</td>
+						<td class='left'><strong>来源网站：</strong>{$source_web}</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			
+			<table class='table table-border table-bordered table-bg'>
+				<thead>
+					<tr>
+						<td colspan='3' class='left'> <strong>预约挂号信息</strong> </td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class='left'> <strong>科室：</strong>{$keshi}</td> 
+						<td class='left'> <strong>病种：</strong>{$bingzhong}</td> 
+						<td class='left'> <strong>预约医生：</strong>{$doctor}</td>
+					</tr>
+					<tr>
+						<td class='left'> <strong>预约时间：</strong>{$time}</td> 
+						<td class='left'> <strong>回访：</strong>{$huifang}</td> 
+						<td class='left'> <strong>录入者：</strong>{$type_in}</td>
+					</tr>
+					<tr>
+						<td class='left'><strong>咨询方式：</strong>{$consult}</td> 
+						<td class='left'> <strong>营销方式：</strong>{$marketing}</td> 
+						<td class='left'> <strong>获取信息渠道：</strong>{$info_channel}</td>
+					</tr>
+				</tbody>
+			</table>
+		
+		
+			<table class='table table-border table-bordered table-bg'>
+				<thead>
+					<tr>
+					   <td colspan='3' class='left'><strong>患者跟踪信息</strong></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan='3' class='left'>
+							<strong>病症：</strong>
+							<textarea class='form-control input-sm' rows='4' readonly='readonly' style='background:#fff;'>{$bingzheng}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class='left' colspan='2'>
+							<strong>回访记录：</strong>
+							<textarea class='form-control input-sm' rows='4' readonly='readonly' style='background:#fff;'>{$remark}</textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>

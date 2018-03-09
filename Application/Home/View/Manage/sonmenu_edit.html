@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script>
+var sonmenu_edit="{:U('Manage/sonmenu_edit')}";
+var sonmenu_list="{:U('Manage/sonmenu_list')}";
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper">
+  <include file="Public:position" />
+    <div class="container-fluid">
+      
+      <div class="row common-add-from">
+        <form  class="form-horizontal" method="post" role="form" id="AddMainmenuForm">
+           <input type="hidden" class="form-control input-sm" id="sonid"  name="sonid" value="{$soninfo.id}">
+          <div class="form-group">
+            <label class="col-md-5 control-label">子菜单：</label>
+            <div class="input-text col-md-7">
+              <input type="text" class="form-control input-sm" id="qx_name_1"  name="qx_name_1" value="{$soninfo.qx_name_1}">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-md-5 control-label">URL：</label>
+            <div class="input-text col-md-7">
+              <input type="text" class="form-control input-sm" id="url"  name="url" value="{$soninfo.url}">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-md-5 control-label">所属主菜单：</label>
+            <div class="input-text col-md-7">
+              <select name="mainmenu" id="mainmenu" class="form-control input-sm">
+                 <volist name="qxlist" id="vo">
+            <option value="{$vo.qx_id}" <if condition="$vo['qx_id'] eq $soninfo['qx_id']">selected="selected" </if>>{$vo.qx_name}</option>
+          </volist>
+              </select>
+              
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-text col-md-5 col-md-offset-7 addbtn">
+              <button type="submit" class="btn btn-primary col-md-6 col-sm-12 col-xs-12">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/validation/jquery.validate.min.js"></script> 
+<script src="__PUBLIC__/js/validation/messages_zh.js"></script> 
+<script>
+$(function(){		
+  $("#AddMainmenuForm").validate({
+    rules:
+    {
+	 qx_name_1: {
+	        required: true,
+	      },
+	      url: {
+	        required: true,
+	      },
+	     
+       
+	  
+    },
+    messages:
+    {
+      qx_name_1: {
+	        required: "子菜单不能为空！",
+	      },
+	      url: {
+	        required: "URL不能为空！",
+	      },
+	     
+    },
+submitHandler: function(form) {  //通过之后回调  
+     var qx_name_1 = $("#qx_name_1").val();
+	 var qx_id = $("#mainmenu").val(); 
+	 var url = $("#url").val();
+	  var sonid = $("#sonid").val();
+	     
+     $.ajax({  
+url : sonmenu_edit,  
+type : "post",  
+dataType : "json",  
+data: {'qx_name_1':qx_name_1,'qx_id':qx_id,'url':url,'id':sonid},
+success : function(data) {  
+if(data.state==0) {
+	alert('该菜单已添加过,勿重复添加！');
+
+}else if(data.state==1){
+	
+	
+	location.href=sonmenu_list;
+	
+	
+	
+	}else{
+		
+		alert('添加失败，请重试！');
+		
+		}
+}  
+     });  
+         },  
+         invalidHandler: function(form, validator) {
+       return false;  
+          }  
+	
+	
+ });
+})
+</script>
+</body>
+</html>

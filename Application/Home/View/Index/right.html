@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__信息管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/tipso/tips.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+var bzxuanzhe_ajax="{:U('Index/kssection_ajax')}";
+var right_ajax="{:U('Index/dengji_ajax')}";
+var search_ajax="{:U('Index/dengji_search_ajax')}";
+var huifang_ajax="{:U('Index/huifang_ajax')}";
+var fenzhen_ajax="{:U('Index/fenzhen_ajax')}";
+var fzdoc_ajax="{:U('Index/fzdoc_ajax')}";
+var xiangqing_ajax="{:U('Index/xiangqing_ajax')}";
+var isorder_ajax="{:U('Index/isorder_ajax')}";
+var kfediton_ajax="{:U('Index/kfediton_ajax')}";
+var kfeditsubmit_ajax="{:U('Index/kfeditsubmit_ajax')}";
+var yydel_ajax="{:U('Index/yydel_ajax')}";
+</script>
+<style>
+  .active{
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    color: #333;
+}
+</style>
+
+</head>
+<body>
+<div id="wrapper">
+	<include file="Public:left" />
+  <div id="page-wrapper"> 
+  	<include file="Public:position" />
+    <div class="container-fluid">
+      <form class="form-horizontal"  role="form" onsubmit="return false;">
+        <include file="Public:searchform2" />
+        <input type="hidden" id="orderby" name="orderby" value="id"/>
+        <input type="hidden" id="orderway" name="orderway" value="desc"/>
+        <input type="hidden" id="date" name="date" value="{$tjdate?$tjdate:'3'}"/>
+        <input type="hidden" id='tjdate' name="tjdate" value="{$tjdate?$tjdate:''}">
+      </form>
+
+      <div class="row" id="yyinfo"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" >
+            	 <include file="Public:thead" />
+            	 <tbody id="ajax"></tbody>
+            </table>
+          </div>
+          <div id="pageNavs" class="pageNavcommon"></div>
+          <div id="pageNavs_sousuo" class="pageNavcommon"></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div class="modal" id="info-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>-->
+<!--<div class="modal" id="kfedit-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>-->
+<script src="__PUBLIC__/js/jquery.js"></script>
+<script src="__PUBLIC__/js/bootstrap.js"></script>
+<script src="__PUBLIC__/js/metisMenu.js"></script>
+<script src="__PUBLIC__/js/sb-admin-2.js"></script>
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script>
+<script src="__PUBLIC__/js/sectionajax.js"></script>
+<script src="__PUBLIC__/js/fenye.js"></script>
+<script src="__PUBLIC__/js/search.js"></script>
+<script src="__PUBLIC__/js/tanchuang.js"></script>
+<script src="__PUBLIC__/js/tipso/tipso.min.js"></script>
+<script>
+	$('thead th[name=doctor]').css('display','none');
+	$(function(){
+	   $("#type_in_strat,#type_in_end,#yuyue_strat,#yuyue_end,#laiyuan_strat,#laiyuan_end").datepicker();   
+	})
+</script>
+</body>
+</html>

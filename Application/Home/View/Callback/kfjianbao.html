@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/tipso/tips.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+var bzxuanzhe_ajax="{:U('Index/kssection_ajax')}";
+var hflist_ajax="{:U('Callback/hflist_ajax')}";
+var hfsearch_ajax="{:U('Callback/hfsearch_ajax')}";
+var xiangqing_ajax="{:U('Index/xiangqing_ajax')}";
+var isorder_ajax="{:U('Index/isorder_ajax')}";
+var kfediton_ajax="{:U('Index/kfediton_ajax')}";
+var kfeditsubmit_ajax="{:U('Index/kfeditsubmit_ajax')}";
+var yydel_ajax="{:U('Index/yydel_ajax')}";
+var hfdown_ajax="{:U('Index/hfdown_ajax')}";
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper"> <include file="Public:position" />
+    <div class="container-fluid">
+      <form class="form-horizontal" role="form" onsubmit="return false;">
+        <div class="row pd-10">
+          <div class="col-md-12">
+            <div class="form-group pd-0">
+              <label class="col-md-2 control-label">回访状态：</label>
+              <div class="input-text col-md-2">
+                <select name="huifang" id="huifang"  class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="huifanglist" id="data">
+                    <option value="{$data.id}">{$data.callback_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="control-label">回访从：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="huifang_in_strat"  id="huifang_in_strat" class="form-control input-sm">
+              </div>
+              <label class="control-label">到：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="huifang_end_strat" id="huifang_end_strat" class="form-control input-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pd-10">
+          <div class="col-md-12">
+            <div class="form-group pd-0">
+              <label class="col-md-2 control-label">来院：</label>
+              <div class="input-text col-md-2">
+                <select name="laiyuan" id="laiyuan" class="form-control input-sm">
+                  <option value="-请选择-">-请选择-</option>
+                  <option value="是">是</option>
+                  <option value="否">否</option>
+                </select>
+              </div>
+              <label class="control-label">咨询员：</label>
+              <div class="input-text col-md-2">
+                <select name="chakan" id="chakan" class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="zxylist" id="data">
+                    <option value="{$data.id}">{$data.name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="control-label hidden-xs"></label>
+              <div class="col-md-1 pd-top-10">
+                <button type="submit" class="btn btn-primary btn-sm btn-block" id="hfsearch_btn">搜索</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <empty name="xqlist">
+              <div class="page-header" id="data-none">
+                <h1 style="text-align:center; color:#F00;">数据为空!</h1>
+              </div>
+              <else />
+              <table class="table table-bordered table-hover" id="ajax">
+                <thead>
+                  <tr class="text-centerenter">
+                    <th>预约号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>电话</th>
+                    <th>科室</th>
+                    <th>病种</th>
+                    <th>医生</th>
+                    <th>预约时间</th>
+                    <th>地区</th>
+                    <th>渠道</th>
+                    <th>qq</th>
+                    <th>来源网站</th>
+                    <th>信息渠道</th>
+                    <th>预约</th>
+                    <th>来院</th>
+                    <th>录入员</th>
+                    <th>录入时间</th>
+                    <th>回访状态</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <volist name="xqlist" id="vo">
+                    <tr class="text-center">
+                      <td>{$vo.yuyue}</td>
+                      <td>{$vo.username}</td>
+                      <td>{$vo.sex}</td>
+                      <td>{$vo.phone}</td>
+                      <td>{$vo.keshi}</td>
+                      <td>{$vo.bingzhong}</td>
+                      <td>{$vo.doctor}</td>
+                      <td>{$vo.time}</td>
+                      <td>{$vo.area}</td>
+                      <td>{$vo.consult}</td>
+                      <td>{$vo.qq}</td>
+                      <td>{$vo.source_web}</td>
+                      <td>{$vo.info_channel}</td>
+                      <td class="isorder" id="order_{$vo.id}" rel="{$vo.yuyue}">{$vo.isorder}</td>
+                      <td>{$vo.comed}</td>
+                      <td>{$vo.type_in}</td>
+                      <td>{$vo.in_time}</td>
+                      <td>{$vo.huifang}</td>
+                      <td class="td-manage"><a rel="{$vo.id}" data-rel="{$vo.isorder}" class="editicon" href="javascript:;" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a><a rel="{$vo.id}" class="xqinfoicon" href="javascript:;" title="详情"><i class="fa fa-fw fa-file-text-o"></i>详情</a><a rel="{$vo.id}" id="delinfo_{$vo.id}" title="删除" class="delicon" href="javascript:;"><i class="fa fa-fw fa-trash-o"></i>删除</a></td>
+                    </tr>
+                  </volist>
+                </tbody>
+              </table>
+            </empty>
+          </div>
+          <div id="pageFenye" class="page">{$page}</div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="ajax_sousuo">
+            </table>
+          </div>
+          <div id="pageNavs_sousuo" class="pageNavcommon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="info-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<div class="modal" id="kfedit-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script> 
+<script src="__PUBLIC__/js/sectionajax.js"></script> 
+<script src="__PUBLIC__/js/zxhf_search.js"></script> 
+<script src="__PUBLIC__/js/tanchuang.js"></script> 
+<script src="__PUBLIC__/js/tipso/tipso.min.js"></script> 
+<script>
+$(function(){
+$("#huifang_in_strat,#huifang_end_strat").datepicker();   
+})
+</script>
+</body>
+</html>

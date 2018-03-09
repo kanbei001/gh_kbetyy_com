@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/tipso/tips.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+var search_ajax="{:U('Index/jianbao_search_ajax')}";
+var xiangqing_ajax="{:U('Index/xiangqing_ajax')}";
+var isorder_ajax="{:U('Index/isorder_ajax')}";
+var kfediton_ajax="{:U('Index/kfediton_ajax')}";
+var kfeditsubmit_ajax="{:U('Index/kfeditsubmit_ajax')}";
+var yydel_ajax="{:U('Index/yydel_ajax')}";
+</script>
+<style>
+	
+bl{color: blue;}
+</style>
+</head>
+<body>
+<div id="wrapper"> 
+	<include file="Public:left" />
+  <div id="page-wrapper"> 
+  	<include file="Public:position" />
+    <div class="container-fluid">
+      <form class="form-horizontal" role="form" onsubmit="return false;">
+        <include file="Public:searchform2" />
+        <input type="hidden" id="info" name="info" value="{$info}"/>
+        <input type="hidden" id="orderby" name="orderby" value="id"/>
+        <input type="hidden" id="orderway" name="orderway" value="desc"/>
+      </form>
+      <div class="row" id="yyinfo"><div class="col-md-5 col-md-offset-1 yyqk_left" style="display:block;">{$mess}&nbsp;<bl>{$count}</bl>&nbsp;条记录！</div></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <empty name="xqlist">
+              <div class="page-header" id="data-none">
+                <h1 style="text-align:center; color:#F00;">数据为空!</h1>
+              </div>
+              <else />
+              <table class="table table-bordered table-hover" >
+                <include file="Public:thead" />
+                <tbody id="ajax">
+                  <volist name="xqlist" id="vo">
+                    <tr class="text-center">
+                      <td>{$vo.yuyue}</td>
+                      <td>{$vo.username}</td>
+                      <td>{$vo['sex']==1?"男":"女"}</td>
+                      <td>{$vo.phone}</td>
+                      <td>{$vo.keshi}</td>
+                      <td>{$vo.bingzhong}</td>
+                      <td>{$vo.doctor}</td>
+                      <td>{$vo.time}</td>
+                      <td>{$vo.area}</td>
+                      <td>{$vo.consult}</td>
+                      <td>{$vo.qq}</td>
+                      <td>{$vo.source_web}</td>
+                      <td>{$vo.info_channel}</td>
+                      <td class="isorder" id="order_{$vo.id}" rel="{$vo.yuyue}">{$vo['isorder']==1?"<span  style='color:green;'>√</span>":"<span  style='color:red;'>×</span>"}</td>
+                      <td>{$vo.type_in}</td>
+                      <td>{$vo['laiyuan']=='是'?"<span  style='color:green;'>√</span>":"<span  style='color:red;'>×</span>"}</td>
+                      <td>{$vo.laiyuan_time}</td>
+                      <td>{$vo.in_time}</td>
+                      <td>{$vo.huifang}</td>
+                      <td class="td-manage" id="td-manage_{$vo.id}" rel="{$vo.laiyuan}">
+                      <script> 
+                      	var tr = ''; 
+                      	if ($("#td-manage_"+{$vo.id}).attr('rel')=='是') { 
+		              		tr += "<a href='javascript:;' onclick=\"showWindow('分诊','/index.php/Index/fenzhen/id/"+{$vo.id}+".html')\"><i <i class='fa fa-fw fa-calendar-plus-o'></i>分诊</a>";
+		              		if ({$quanxian} <=3 ) {
+		              		   tr += "<a href='javascript:;' onclick=\"showWindow('患者信息修改','/index.php/Index/edit/id/"+{$vo.id}+".html')\"><i class='fa fa-fw fa-edit'></i>编辑</a>";
+		              		}
+		                } 
+		              	tr += "<a href='javascript:;' onclick=\"showWindow('患者详情','/index.php/Index/view/id/"+{$vo.id}+".html')\"><i class='fa fa-fw fa-file-text-o'></i>详情</a>";
+		                if ({$quanxian} <= 2) {
+		              	   tr += "<a href='javascript:;' onclick=\"DelOne('您确定要删除ID为["+{$vo.id}+"]的记录吗？','/index.php/Index/del/id/"+{$vo.id}+".html')\"><i class='fa fa-fw fa-trash-o'></i>删除</a></td></tr>";
+	                    }
+		                $("#td-manage_"+{$vo.id}).html(tr);
+                      </script>	
+                      	<!--<a rel="{$vo.id}" data-rel="{$vo.isorder}" class="editicon" href="javascript:;" title="编辑"><i class="fa fa-fw fa-edit"></i>编辑</a><a rel="{$vo.id}" class="xqinfoicon" href="javascript:;" title="详情"><i class="fa fa-fw fa-file-text-o"></i>详情</a><a rel="{$vo.id}" id="delinfo_{$vo.id}" title="删除" class="delicon" href="javascript:;"><i class="fa fa-fw fa-trash-o"></i>删除</a></td>-->
+                    </tr>
+                  </volist>
+                </tbody>
+              </table>
+            </empty>
+          </div>
+          <div id="pageFenye" class="page">{$page}</div>
+          <div id="pageNavs_sousuo" class="pageNavcommon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="info-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<div class="modal" id="kfedit-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script>  
+<script src="__PUBLIC__/js/sectionajax.js"></script>
+<script src="__PUBLIC__/js/jianbao_search.js"></script> 
+<script src="__PUBLIC__/js/tanchuang.js"></script> 
+<script src="__PUBLIC__/js/tipso/tipso.min.js"></script>
+<script>
+$(function(){
+$("#type_in_strat,#type_in_end,#yuyue_strat,#yuyue_end,#laiyuan_strat,#laiyuan_end").datepicker();   
+})
+</script>
+</body>
+</html>

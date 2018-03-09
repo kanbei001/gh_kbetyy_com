@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/tipso/tips.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+var bzxuanzhe_ajax="{:U('Index/kssection_ajax')}";
+var hflist_ajax="{:U('Callback/hflist_ajax')}";
+var hfsearch_ajax="{:U('Callback/hfsearch_ajax')}";
+var xiangqing_ajax="{:U('Index/xiangqing_ajax')}";
+var isorder_ajax="{:U('Index/isorder_ajax')}";
+var kfediton_ajax="{:U('Index/kfediton_ajax')}";
+var kfeditsubmit_ajax="{:U('Index/kfeditsubmit_ajax')}";
+var yydel_ajax="{:U('Index/yydel_ajax')}";
+var hfdown_ajax="{:U('Index/hfdown_ajax')}";
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper"> <include file="Public:position" />
+    <div class="container-fluid">
+      <form class="form-horizontal" role="form" onsubmit="return false;">
+        <div class="row pd-10">
+          <div class="col-md-12">
+            <div class="form-group pd-0">
+              <label class="control-label"  style="margin-left: 10%">预约时间：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="yy_in_strat"  id="yy_strat" class="form-control input-sm datepicker">
+              </div>
+              <label class="control-label">--</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="yy_end_strat" id="yy_end_strat" class="form-control input-sm datepicker">
+              </div>
+              <label class="control-label">回访时间：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="hf_in_strat"  id="huifang_in_strat" class="form-control input-sm datepicker">
+              </div>
+              <label class="control-label">--</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="hf_end_strat" id="huifang_end_strat" class="form-control input-sm datepicker">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pd-10">
+          <div class="col-md-12">
+            <div class="form-group pd-0">
+              <label class="control-label"  style="margin-left: 10%">回访状态：</label>
+              <div class="input-text col-md-2">
+                <select name="huifang" id="huifang"  class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="huifanglist" id="data">
+                    <option value="{$data.id}">{$data.callback_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="control-label">来院：</label>
+              <div class="input-text col-md-2">
+                <select name="laiyuan" id="laiyuan" class="form-control input-sm">
+                  <option value="0">-请选择-</option>
+                  <option value="是">是</option>
+                  <option value="否">否</option>
+                </select>
+              </div>
+              <label class="control-label">咨询员：</label>
+              <div class="input-text col-md-2">
+                <select name="chakan" id="chakan" class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="zxylist" id="data">
+                    <option value="{$data.id}">{$data.name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="control-label hidden-xs"></label>
+              <div class="col-md-1 pd-top-10">
+                <button type="submit" class="btn btn-primary btn-sm btn-block" id="hfsearch_btn">搜索</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row" id="hfinfo">
+       <!--  <div class="col-md-5 yyqk_left" style="display:none;"> <a href="{:U('Callback/jianbao',array('info'=>'sywhf_weidao'))}" class="btn btn-default" target="_blank"><span>未回访（<b>{$szdata['wd_s1']}</b>）</span></a></div>
+        <div class="col-md-5 yyqk_left" style="display:none;"> <a href="{:U('Callback/jianbao',array('info'=>'bywhf_weidao'))}" class="btn btn-default" target="_blank"><span>未回访（<b>{$szdata['wd_s2']}</b>）</span></a></div>
+        <div class="col-md-5 yyqk_left" style="display:none;"> <a href="{:U('Callback/jianbao',array('info'=>'yzwhf_weidao'))}" class="btn btn-default" target="_blank"><span>未回访（<b>{$szdata['wd_s3']}</b>）</span></a></div>
+        <div class="col-md-5 yyqk_left" style="display:none;"> <a href="{:U('Callback/jianbao',array('info'=>'ztwhf_weidao'))}" class="btn btn-default" target="_blank"><span>未回访（<b>{$szdata['wd_s4']}</b>）</span></a></div>
+        <div class="col-md-5 yyqk_left" style="display:block;"> <a href="{:U('Callback/jianbao',array('info'=>'jtwhf_weidao'))}" class="btn btn-default" target="_blank"><span>未回访（<b>{$szdata['wd_s5']}</b>）</span></a></div>
+        <div class="col-md-5 yyqk_left" style="display:none;"> <a href="{:U('Callback/jianbao',array('info'=>'mtwhf_weidao'))}" class="btn btn-default" target="_blank"><span>未回访（<b>{$szdata['wd_s6']}</b>）</span></a></div>
+        <div class="col-md-5 yyqk_right"> <a class="btn btn-default" href="javascript:;">上月</a> <a class="btn btn-default" href="javascript:;">本月</a> <a class="btn btn-default" href="javascript:;">一周</a> <a class="btn btn-default" href="javascript:;">昨天</a> <a class="btn btn-primary" href="javascript:;">今天</a> <a class="btn btn-default" href="javascript:;">明天</a> </div> -->
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="ajax">
+            </table>
+          </div>
+          <div id="pageNavs" class="pageNavcommon"></div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="ajax_sousuo">
+            </table>
+          </div>
+          <div id="pageNavs_sousuo" class="pageNavcommon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="info-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<div class="modal" id="kfedit-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script> 
+<script src="__PUBLIC__/js/sectionajax.js"></script> 
+<script src="__PUBLIC__/js/zxhf_fenye.js"></script> 
+<script src="__PUBLIC__/js/zxhf_search.js"></script> 
+<script src="__PUBLIC__/js/tanchuang.js"></script> 
+<script src="__PUBLIC__/js/tipso/tipso.min.js"></script> 
+<script>
+$(function(){
+   $(".datepicker").datepicker(); 
+})
+</script>
+
+</body>
+</html>

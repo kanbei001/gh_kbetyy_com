@@ -1,0 +1,42 @@
+<style>
+    .modal-dialog {width: 400px;} 
+</style>
+
+    <switch name="do">
+        <case value="添加">
+            <form  method="post" class="form-inline showWindow" action="{:U('Section/bz_add')}" id="ajaxForm2">
+        </case>
+        <default />
+            <form  method="post" class="form-inline showWindow" action="{:U('Section/bz_edit')}" id="ajaxForm2">
+            <input type="hidden" name="id" value="{$id}">
+             <div class="form-group">
+                <label>ID：</label>
+                <input type="text" class="form-control" readonly="readonly" value="{$id}"/>
+            </div>
+    </switch>
+   
+    <div class="form-group">
+        <label>名称：</label>
+        <input name="bingzhong_name" type="text" class="form-control" value="{$bingzhong_name}"/>
+    </div>
+     <div class="form-group">
+        <label>科室：</label>
+            <select name="keshi_id" class="form-control">
+                <volist name="Secinfos" id="vo">
+                    <option value="{$vo.id}" <eq name="vo.id" value="$keshi_id">selected="selected"</eq>>{$vo.section_name}</option>
+                </volist>
+            </select>
+       
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn  btn-info">确认{$do}</button>
+    </div>
+</form>
+<script>
+    $('#ajaxForm2').ajaxForm({
+        dataType:'json',
+        success:function(data){
+            Result(data);
+        }
+    });
+</script>

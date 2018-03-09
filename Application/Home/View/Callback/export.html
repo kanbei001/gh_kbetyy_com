@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/tipso/tips.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper"> <include file="Public:position" />
+    <div class="container-fluid">
+   <form class="form-horizontal" role="form" action="{:U('Callback/daochu')}" role="form" method="post">
+        <div class="row pd-10">
+          <div class="col-md-12">
+            <div class="form-group pd-0">
+              <label class="col-md-2 control-label">回访状态：</label>
+              <div class="input-text col-md-2">
+                <select name="huifang" id="huifang"  class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="huifanglist" id="data">
+                    <option value="{$data.id}">{$data.callback_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="control-label">回访从：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="huifang_in_strat"  id="huifang_in_strat" class="form-control input-sm">
+              </div>
+              <label class="control-label">到：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="huifang_end_strat" id="huifang_end_strat" class="form-control input-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pd-10">
+          <div class="col-md-12">
+            <div class="form-group pd-0">
+              <label class="col-md-2 control-label">来院：</label>
+              <div class="input-text col-md-2">
+                <select name="laiyuan" id="laiyuan" class="form-control input-sm">
+                  <option value="-请选择-">-请选择-</option>
+                  <option value="是">是</option>
+                  <option value="否">否</option>
+                </select>
+              </div>
+              <label class="control-label">咨询员：</label>
+              <div class="input-text col-md-2">
+                <select name="chakan" id="chakan" class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="zxylist" id="data">
+                    <option value="{$data.id}">{$data.name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="control-label hidden-xs"></label>
+             
+              <div class="col-md-1 pd-top-10">
+    <button type="submit" class="btn btn-primary btn-sm btn-block" id="hfexport_btn">导出</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.js"></script>
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script> 
+<script>
+$(function(){
+$("#huifang_in_strat,#huifang_end_strat").datepicker();   
+})
+</script>
+</body>
+</html>

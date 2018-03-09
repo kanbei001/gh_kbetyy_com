@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script>
+var qdgroup_add="{:U('Qudaogroup/qdgroup_add')}";
+var Qudaogroup_list="{:U('Qudaogroup/qdgroup_list')}";
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper">
+  <include file="Public:position" />
+    <div class="container-fluid">
+      
+      <div class="row common-add-from">
+        <form  class="form-horizontal" method="post" role="form" id="AddQdgroupForm">
+          <div class="form-group">
+            <label class="col-md-5  control-label">添加渠道：</label>
+            <div class="input-text col-md-7">
+              <input type="text" class="form-control input-sm" id="qdgroup"  name="qdgroup">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-text col-md-5 col-md-offset-7 addbtn">
+              <button type="submit" class="btn btn-primary col-md-6 col-sm-12 col-xs-12">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/validation/jquery.validate.min.js"></script> 
+<script src="__PUBLIC__/js/validation/messages_zh.js"></script> 
+<script>
+$(function(){		
+  $("#AddQdgroupForm").validate({
+    rules:
+    {
+	  qdgroup: "required",
+	  
+    },
+    messages:
+    {
+      qdgroup: "渠道不能为空！",
+
+    },
+submitHandler: function(form) {  //通过之后回调  
+     var qdgroup = $("#qdgroup").val();  
+     $.ajax({  
+url : qdgroup_add,  
+type : "post",  
+dataType : "json",  
+data: {'qdgroup':qdgroup},
+success : function(data) {  
+if(data.state==0) {
+	alert('该渠道已添加过,勿重复添加！');
+	
+}else if(data.state==1){
+	
+	
+	location.href=Qudaogroup_list;
+	
+	
+	
+	}else{
+		
+		alert('添加失败，请重试！');
+		
+		}
+}  
+     });  
+         },  
+         invalidHandler: function(form, validator) {
+       return false;  
+          }  
+	
+	
+ });
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!--搜索表单内容-->
+<style>
+.col-md-11{width:100%} 
+.col-md-1 { width: 5.25%; }  
+.form-group .m1{width: 8%;} 
+.col-md-2{width:12%}  
+.col-md-3 { margin-left: 60px; width: 15%; } 
+.col-md-offset-6 { width: 45%; margin-left: 0; margin-right: 10px; } 
+.Smore { line-height: 30px; margin-left: 0; } 
+.inpfl{width: 45%;float: left;} 
+.inpfr{width: 45%;float: right;} 
+.m2{width:13%} 
+.tags{border: 2px outset grey; display: none; margin-bottom: 10px; margin-left: 0; padding: 5px 10px; width: 100%;}
+.tags input{margin-right: 5px; margin-left: 30px;}
+.tags input:first-child{margin-right: 5px; margin-left: 0;}
+.btn2{background: #353f4f;}
+.btn2 a{color: #fff;}
+</style>
+<div class="row">
+  <div class="col-md-11">
+    <div class="form-group">
+      <label class="col-md-1 control-label m1" style="margin-left:20px">模糊搜索：</label>
+      <div class="input-text col-md-2">
+        <input type="text" class="form-control input-sm" id="mohu" name="mohu">
+      </div>
+     
+      <label class="col-md-1 control-label" for="laiyuan">来院：</label>
+      <div class="input-text col-md-2 m2">
+        <select name="laiyuan" id="laiyuan" class="form-control input-sm">
+          <option value="-请选择-">-请选择-</option>
+          <option value="是">是</option>
+          <option value="否">否</option>
+        </select>
+      </div>
+      <label class="col-md-1 control-label m1" for="zxylist">录入员：</label>
+      <div class="input-text col-md-2">
+        <select name="chakan" id="zxylist" class="form-control input-sm">
+          <option value="0">--请选择--</option>
+          <volist name="zxylist" id="data">
+            <option value="{$data.id}">{$data.name}</option>
+          </volist>
+        </select>
+      </div>
+     <label class="col-md-1 control-label" for="type_in_strat">录入时间：</label>
+      <div class="input-text col-md-2 m2">
+        <input type="text" class="form-control input-sm inpfl time" id="type_in_strat"  name="type_in_strat">&nbsp;-- 
+        <input type="text" class="form-control input-sm inpfr time" id="type_in_end"  name="type_in_end">
+      </div>
+     
+       <div class="input-text col-md-3">
+        <input type="hidden" id="formtype" value="click"/>
+        <button type="submit" class="btn btn-primary btn-sm  col-md-offset-6"  id="search_btns">搜索</button>
+        <a href='javascript:;' class="btn btn-primary btn-sm col-md-offset-6 btn2" onclick="showWindow('高级搜索','/index.php/Base/searchform.html')">高级搜索</a>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="text-center" style="border-top:1px solid #ccc;">
+  <a href="javascript:;" onclick="ShowMore('tags');" style="float: right;padding: 5px 10px;"><i id="fa" class="fa fa-cog"></i>&nbsp;显示设置</a> 
+</p>
+
+<!--显示设置-->
+<div class="row tags" id="tags">
+  <input type="checkbox" onclick="showTags(this,'sex')" checked/>性别
+  <input type="checkbox" onclick="showTags(this,'phone')" checked/>电话
+  <input type="checkbox" onclick="showTags(this,'keshi')" checked/>科室
+  <input type="checkbox" onclick="showTags(this,'bingzhong')" checked/>病种
+  <input type="checkbox" onclick="showTags(this,'doctor')" checked/>医生
+  <input type="checkbox" onclick="showTags(this,'time')" checked/>预约时间
+  <input type="checkbox" onclick="showTags(this,'area')" checked/>地区
+  <input type="checkbox" onclick="showTags(this,'consult')" checked/>渠道
+  <input type="checkbox" onclick="showTags(this,'qq')" checked/>QQ
+  <input type="checkbox" onclick="showTags(this,'source_web')" checked/>来源网站
+  <input type="checkbox" onclick="showTags(this,'info_channel')" checked/>信息渠道
+  <input type="checkbox" onclick="showTags(this,'isorder')" checked/>预约情况
+  <input type="checkbox" onclick="showTags(this,'type_in')" checked/>录入员
+  <input type="checkbox" onclick="showTags(this,'laiyuan')" checked/>来院
+  <input type="checkbox" onclick="showTags(this,'laiyuan_time')" checked/>来院时间
+  <input type="checkbox" onclick="showTags(this,'in_time')" checked/>录入时间
+  <input type="checkbox" onclick="showTags(this,'huifang')" checked/>回访状态
+</div>
+
+<script>
+   function ShowMore(id){
+      var obj = document.getElementById(id); 
+      if(obj.style.display=='none'){
+          obj.style.display='block';
+          $("#fa").attr("class",'fa fa-angle-double-up fa-lg');
+      }else{
+          obj.style.display='none';
+          $("#fa").attr("class",'fa fa-angle-double-down fa-lg');
+      } 
+   }
+   function showTags(obj,name){
+       var th = $('th[name="'+name+'"]');
+       var td = $('td[name="'+name+'"]');
+       if(th.css('display') == 'table-cell'){
+        th.css('display','none');
+        td.css('display','none');
+       }else{
+        th.css('display','table-cell');
+        td.css('display','table-cell');
+       }
+    
+   }
+   $('#search_btns').click(function(){
+       document.getElementById("formtype").value = 'short';
+   })
+  $(function(){
+     $(".time").datepicker();  
+  })
+</script>
+

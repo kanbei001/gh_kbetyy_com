@@ -1,0 +1,64 @@
+<style>
+.smdialog {
+    max-width: 400px;width: auto;
+}
+</style>
+
+    <switch name="do">
+        <case value="添加">
+            <form  method="post" class="form-inline showWindow" action="{:U('Config/add')}" id="ajaxForm2">
+            <input type="hidden" name="do" value="添加">
+        </case>
+        <default />
+            <form  method="post" class="form-inline showWindow" action="{:U('Config/edit')}" id="ajaxForm2">
+            <input type="hidden" name="do" value="修改">
+            <input type="hidden" name="id" value="{$id}">
+    </switch>
+
+    <div class="form-group">
+        <label>登录Ip：</label>
+        
+        <eq name="do" value="移动">
+            <input name="name" type="text" class="form-control "  value="{$name}" readonly="readonly" />
+        <else/>
+            <input name="name" type="text" class="form-control name"  value="{$name}"/>
+        </eq>
+    </div>
+       
+   
+  
+    <div class="form-group">
+        <label>用户：</label>
+            <select name="u_id" class="form-control">
+                <option value="0">请选择</option>
+                <foreach name="User" item="vo" key="k">
+                    <option value="{$k}" <eq name="k" value="$u_id">selected="selected"</eq>>{$vo}</option>
+                </foreach>
+            </select>
+    </div>
+    
+    <div class="form-group">
+        <label>状态：</label>
+            <select name="state" class="form-control">
+                <option value="0">禁用</option>
+                <option value="1">启用</option>
+            </select>
+    </div>
+     <input name="parent_id" type="hidden" value="{$tps}" content='父级栏目'/>  
+    <div class="text-center" style="margin-top: 20px;">
+        <button type="submit" class="btn  btn-info">确认{$do}</button>
+    </div>
+</form>
+
+<script>
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass: 'iradio_flat-green'
+    });
+    $('#ajaxForm2').ajaxForm({
+        dataType:'json',
+        success:function(data){
+            Result(data);
+        }
+    });
+</script>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/tipso/tips.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+var bzxuanzhe_ajax="{:U('Index/kssection_ajax')}";
+var right_ajax="{:U('Index/dengji_ajax')}";
+var search_ajax="{:U('Index/dengji_search_ajax')}";
+var huifang_ajax="{:U('Index/huifang_ajax')}";
+var fenzhen_ajax="{:U('Index/fenzhen_ajax')}";
+var fzdoc_ajax="{:U('Index/fzdoc_ajax')}";
+var xiangqing_ajax="{:U('Index/xiangqing_ajax')}";
+var isorder_ajax="{:U('Index/isorder_ajax')}";
+var kfediton_ajax="{:U('Index/kfediton_ajax')}";
+var kfeditsubmit_ajax="{:U('Index/kfeditsubmit_ajax')}";
+var yydel_ajax="{:U('Index/yydel_ajax')}";
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper"> <include file="Public:position" />
+    <div class="container-fluid">
+      <form class="form-horizontal" role="form" onsubmit="return false;">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="yuyue">预约号：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="yuyue" name="yuyue">
+              </div>
+              <label class="col-md-1 control-label" for="username">姓名：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="username" name="username">
+              </div>
+              <label class="col-md-1 control-label" for="type_in_strat">录入开始：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm"  id="type_in_strat"  name="type_in_strat">
+              </div>
+              <label class="col-md-1 control-label" for="type_in_end">录入结束：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="type_in_end"  name="type_in_end">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="zxylist">查看：</label>
+              <div class="input-text col-md-2">
+                <select name="zxylist" id="zxylist" class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="zxylist" id="data">
+                    <option value="{$data.id}">{$data.name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="col-md-1 control-label" for="phone">电话：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="phone" name="phone">
+              </div>
+              <label class="col-md-1 control-label" for="yuyue_strat">预约开始：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="yuyue_strat"  name="yuyue_strat">
+              </div>
+              <label class="col-md-1 control-label" for="yuyue_end">预约结束：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="yuyue_end"  name="yuyue_end">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="laiyuan">来院：</label>
+              <div class="input-text col-md-2">
+                <select name="laiyuan" id="laiyuan" class="form-control input-sm">
+                  <option value="-请选择-">-请选择-</option>
+                  <option value="是">是</option>
+                  <option value="否">否</option>
+                </select>
+              </div>
+              <label class="col-md-1 control-label" for="qq">QQ：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="qq" name="qq">
+              </div>
+              <label class="col-md-1 control-label" for="laiyuan_strat">来院开始：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm"  id="laiyuan_strat" name="laiyuan_strat">
+              </div>
+              <label class="col-md-1 control-label" for="laiyuan_end">来院结束：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="laiyuan_end" name="laiyuan_end">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-1 control-label" for="huifang">回访类别：</label>
+              <div class="input-text col-md-2">
+                <select name="huifang" id="huifang"  class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="huifanglist" id="data">
+                    <option value="{$data.id}">{$data.callback_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="col-md-1 control-label" for="keshi">科室：</label>
+              <div class="input-text col-md-2">
+                <select name="keshi" id="keshi" class="form-control input-sm">
+                  <option value="0">--请选择--</option>
+                  <volist name="keshilist" id="data">
+                    <option value="{$data.id}">{$data.section_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="col-md-1 control-label" for="isorder">预约情况：</label>
+              <div class="input-text col-md-2">
+                <select name="isorder" id="isorder" class="form-control input-sm">
+                  <option value="9999">--请选择--</option>
+                  <option value="1">预约</option>
+                  <option value="0">登记</option>
+                </select>
+              </div>
+              <div class="input-text col-md-3">
+                <button type="submit" class="btn btn-primary btn-sm col-md-4 col-md-offset-6 col-sm-12 col-xs-12"  id="search_btns">搜索</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="text-center" style="border-top:1px solid #ccc;"><a href="javascript:;" data-toggle="collapse" data-target="#duoxuan"><i class="fa fa-angle-double-down fa-lg"></i></a> </p>
+        <div class="row choicemultiple collapse" id="duoxuan">
+          <div class="col-md-11">
+            <div class="form-group">
+              <label class="col-md-1 control-label">地区：</label>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectLocation" name="selectLocation">
+                  <volist name="arealist" id="data">
+                    <option value="{$data.id}">{$data.area_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectLocation_1" name="selectLocation_1">
+                </select>
+              </div>
+              <label class="col-md-1 control-label">信息渠道：</label>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectInformationChannel" name="selectInformationChannel">
+                  <volist name="qudaoinfolist" id="data">
+                    <option value="{$data.id}">{$data.info_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectInformationChannel_1" name="selectInformationChannel_1">
+                </select>
+              </div>
+              <label class="col-md-1 control-label">渠  道：</label>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectConsultMethod" name="selectConsultMethod">
+                  <volist name="consultlist" id="data">
+                    <option value="{$data.id}">{$data.consult_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectConsultMethod_1" name="selectConsultMethod_1">
+                </select>
+              </div>
+              <label class="col-md-1 control-label">营  销：</label>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectMarketingMethod" name="selectMarketingMethod">
+                  <volist name="yingxiaolist" id="data">
+                    <option value="{$data.id}">{$data.yingxiao_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectMarketingMethod_1" name="selectMarketingMethod_1">
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-1 control-label">来源网站：</label>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectWebSite" name="selectWebSite">
+                  <volist name="weblist" id="data">
+                    <option value="{$data.id}">{$data.web_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <div class="input-text col-md-1">
+                <select multiple="multiple" class="form-control" id="selectWebSite_1" name="selectWebSite_1">
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-5 col-md-offset-1 yyqk_left" style="display:none;"><a href="{:U('Index/jianbao',array('info'=>'dangyue_add'))}" class="btn btn-default" target="_blank"><span>预约（<b>111{$new_month_yy}</b>）</span></a> <a href="{:U('Index/jianbao',array('info'=>'dangyue_yidao'))}" class="btn btn-default" target="_blank"><span>来院（<b>{$arr.month_dy}</b>）</span></a> <a href="{:U('Index/jianbao',array('info'=>'dangyue_weidao'))}" class="btn btn-default" target="_blank"><span>未到（<b>{$arr.month_wd}</b>）</span></a></div>
+        <div class="col-md-5 col-md-offset-1 yyqk_left" style="display: none;"><a href="{:U('Index/jianbao',array('info'=>'week_add'))}" class="btn btn-default" target="_blank"><span>预约（<b>{$arr.week_yy}</b>）</span></a> <a href="{:U('Index/jianbao',array('info'=>'week_yidao'))}" class="btn btn-default" target="_blank"><span>来院（<b>{$arr.week_dy}</b>）</span></a> <a href="{:U('Index/jianbao',array('info'=>'week_weidao'))}" class="btn btn-default" target="_blank"><span>未到（<b>{$arr.week_wd}</b>）</span></a></div>
+        <div class="col-md-5 col-md-offset-1 yyqk_left" style="display: none;"><a href="{:U('Index/jianbao',array('info'=>'yesterday_add'))}" class="btn btn-default" target="_blank"><span>预约（<b>{$arr.yesterday_yy}</b>）</span></a> <a href="{:U('Index/jianbao',array('info'=>'yesterday_yidao'))}" class="btn btn-default" target="_blank"><span>来院（<b>{$arr.yesterday_dy}</b>）</span></a> <a href="{:U('Index/jianbao',array('info'=>'yesterday_weidao'))}" class="btn btn-default" target="_blank"><span>未到（<b>{$arr.yesterday_wd}</b>）</span></a></div>
+        <div class="col-md-5 col-md-offset-1 yyqk_left" style="display:block;"><a href="{:U('Index/jianbao',array('info'=>'today_add'))}" class="btn btn-default" target="_blank"><span>预约（<b>{$arr.today_yy}</b>）</span></a> <a href="{:U('Index/jianbao',array('info'=>'today_yidao'))}" class="btn btn-default" target="_blank"><span>来院（<b>{$arr.today_dy}</b>）</span></a> <a href="{:U('Index/jianbao',array('info'=>'today_weidao'))}" class="btn btn-default" target="_blank"><span>未到（<b>{$arr.today_wd}</b>）</span></a></div>
+        <div class="col-md-5 col-md-offset-1 yyqk_left" style="display: none;"><a href="{:U('Index/jianbao',array('info'=>'tomorrow_yudao'))}" class="btn btn-default" target="_blank"><span>预到诊（<b>{$arr.tomorrow_dz}</b>）</span></a></div>
+        <div class="col-md-5 yyqk_right"> <a class="btn btn-default" href="javascript:;">本月</a> <a class="btn btn-default" href="javascript:;">一周</a> <a class="btn btn-default" href="javascript:;">昨天</a> <a class="btn btn-primary" href="javascript:;">今天</a> <a class="btn btn-default" href="javascript:;">明天</a> </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="ajax">
+            </table>
+                    </div>
+          <div id="pageNavs" class="pageNavcommon"></div>
+          <div id="pageNavs_sousuo" class="pageNavcommon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="info-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<div class="modal" id="kfedit-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script> 
+<script src="__PUBLIC__/js/sectionajax.js"></script> 
+<script src="__PUBLIC__/js/dengji_fenye.js"></script> 
+<script src="__PUBLIC__/js/dengji_search.js"></script> 
+<script src="__PUBLIC__/js/tanchuang.js"></script> 
+<script src="__PUBLIC__/js/tipso/tipso.min.js"></script> 
+<script>
+$(function(){
+$("#type_in_strat,#type_in_end,#yuyue_strat,#yuyue_end,#laiyuan_strat,#laiyuan_end").datepicker();   
+})
+</script>
+</body>
+</html>

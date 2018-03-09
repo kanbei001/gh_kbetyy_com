@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script>
+var user_edit="{:U('Manage/user_edit')}";
+var user_list="{:U('Manage/user_list')}";
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper">
+  <include file="Public:position" />
+    <div class="container-fluid">
+      
+      <div class="row common-add-from">
+        <form  class="form-horizontal" method="post" role="form" id="AddUeserForm">
+          <input type="hidden" name="u_id" id="u_id" value="{$u_id}"/>
+          <div class="form-group">
+            <label class="col-md-5 control-label">用户名：</label>
+            <div class="input-text col-md-7">
+              <input type="text" class="form-control input-sm" id="username"  name="username" value="{$yonghuinfo.name}" disabled="disabled">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-5 control-label">密码：</label>
+            <div class="input-text col-md-7">
+              <input type="password" class="form-control input-sm" id="password"  name="password" value="{$yonghuinfo.password}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-5 control-label">确认密码：</label>
+            <div class="input-text col-md-7">
+              <input type="password" class="form-control input-sm" id="confirm_password"  name="confirm_password" value="{$yonghuinfo.password}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-5 control-label">管理级别：</label>
+            <div class="input-text col-md-7">
+              <select name="group" id="group" class="form-control input-sm">
+                <volist name="grouplist" id="vo"> <option value="{$vo.m_id}" 
+                  <if condition="$vo['m_id'] eq $m_id">selected="selected" </if>
+                  >{$vo.group_name}
+                  </option>
+                </volist>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-text col-md-5 col-md-offset-7 addbtn">
+              <button type="submit" class="btn btn-primary col-md-6 col-sm-12 col-xs-12">提交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/validation/jquery.validate.min.js"></script> 
+<script src="__PUBLIC__/js/validation/messages_zh.js"></script> 
+<script>
+$(function(){		
+  $("#AddUeserForm").validate({
+    rules:
+    {
+	 username: {
+	        required: true,
+	        minlength: 2
+	      },
+	      password: {
+	        required: true,
+	        minlength:2
+	      },
+	      confirm_password: {
+	        required: true,
+	        minlength: 2,
+	        equalTo: "#password"
+	      },
+           
+		   
+       
+	  
+    },
+    messages:
+    {
+      username: {
+	        required: "请输入用户名",
+	        minlength: "用户长度不能低于2个字符"
+	      },
+	      password: {
+	        required: "请输入密码",
+	        minlength: "密码长度不能小于2个字符"
+	      },
+	      confirm_password: {
+	        required: "请输入确认密码",
+	        minlength: "密码长度不能小于2个字符",
+	        equalTo: "两次密码输入不一致"
+	      },
+
+
+    },
+submitHandler: function(form) {  //通过之后回调  
+     var username = $("#username").val();
+	 var password = $("#password").val();
+	 var group = $("#group").val();
+	 var u_id = $("#u_id").val();        
+     $.ajax({  
+url : user_edit,  
+type : "post",  
+dataType : "json",  
+data: {'username':username,'password':password,'group':group,'u_id':u_id},
+success : function(data) {  
+if(data.state==0) {
+	alert('该用户已添加过,勿重复添加！');
+
+}else if(data.state==1){
+	
+	
+	location.href=user_list;
+	
+	
+	
+	}else{
+		
+		alert('添加失败，请重试！');
+		
+		}
+}  
+     });  
+         },  
+         invalidHandler: function(form, validator) {
+       return false;  
+          }  
+	
+	
+ });
+})
+</script>
+</body>
+</html>

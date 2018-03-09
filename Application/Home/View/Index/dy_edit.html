@@ -1,0 +1,264 @@
+<style>
+    .modal-dialog {width: 600px;} 
+    .modal-dialog .form-horizontal { display: inline-block; margin-top: -15px; } 
+    .modal-dialog .form-horizontal .control-label { width: 80px; } 
+    .modal-dialog .col-md-9 { width: 85%; } 
+    .modal-dialog .form-group1 { display: inline-table; float: left; margin: 6px 0 0; width: 50%; } 
+    .modal-dialog .col-md-4 { width: 70%; }
+    .modal-dialog .long{width: 100%;}
+</style>
+
+<lt name="quanxian" value="3">
+	<style>
+    .modal-dialog {margin-top: 100px !important;} 
+</style>
+	<script>
+		$('div[rel=15]').prop('outerHTML', '');
+	</script>
+<else/>
+<script>
+	$('div[rel^=2]').prop('outerHTML', '');
+	$('div[data^=2]').prop('outerHTML', '');
+</script>
+</lt>
+	
+
+<div class='modal-body'>
+	<form class='form-horizontal' role='form' id='EditkfForm'>
+		<input type='hidden' id='id' name='id' value='{$id}'>
+		<div class='form-group1' rel="01">
+			<label class='col-md-2 control-label'>预约号：</label>
+			<div class='input-text col-md-4'>
+			    <input type='text' class='form-control input-sm' id='yuyue' name='yuyue' readonly='readonly' value='{$yuyue}' >
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="02">
+			<label class='control-label'>姓名：</label>
+			<div class='input-text col-md-4'>
+				<input type='text' name='username' class='form-control input-sm' id='username' value='{$username}' placeholder='必填'>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="03">
+			<label class='col-md-2 control-label'>电话：</label>
+			<div class='input-text col-md-4'>
+			    <input type='text' class='form-control input-sm' id='phone' name='phone' value='{$phone}'>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="04">
+			<label class='control-label'>Q&nbsp;&nbsp;Q：</label>
+			<div class='input-text col-md-4'>
+			    <input type='text' class='form-control input-sm' id='qq' name='qq' value='{$qq}'>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="05">
+			<label class='col-md-2 control-label'>年龄：</label>
+			<div class='input-text col-md-4'>
+			    <input type='text' class='form-control input-sm' id='age' name='age' value='{$age}'>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="06">
+			<label class='control-label'>性别：</label>
+			<div class='input-text col-md-4'>
+				<select id='sex' name='sex' class='form-control input-sm'>
+					<volist name="SEX" id="v" key='k'>
+	                    <option value="{$k}" <eq name="k" value="$sex">selected</eq>>{$v}</option>
+	                </volist>
+                </select>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="07">
+			<label class='col-md-2 control-label'>科室：</label>
+			<div class='input-text col-md-4'>
+			    <select name='keshi' id='keshi' class='form-control input-sm'>
+					<volist name="keshilist" id="v">
+	                    <option value="{$v.section_name}" <eq name="v.section_name" value="$keshi">selected</eq>>{$v.section_name}</option>
+	                </volist>
+                </select>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="08">
+			<label class='control-label'>病种：</label>
+			<div class='input-text col-md-4'>
+			    <select name='bingzhong' id='bingzhong' class='form-control input-sm'>
+					<volist name="bzlist" id="v">
+	                    <option value="{$v.bingzhong_name}" <eq name="v.bingzhong_name" value="$bingzhong">selected</eq>>{$v.bingzhong_name}</option>
+	                </volist>
+                </select>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="09">
+			<label class='col-md-2 control-label'>地区：</label>
+			<div class='input-text col-md-4'>
+				<select name='area' id='area' class='form-control input-sm'>
+					<volist name="arealist" id="v">
+	                    <option value="{$v.area_name}" <eq name="v.area_name" value="$area">selected</eq>>{$v.area_name}</option>
+	                </volist>
+                </select>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="10" data='21'>
+			<label class='control-label'>预约：</label>
+			<div class='input-text col-md-4'>
+				<select name='isorder' id='isorder' class='form-control input-sm'>
+					<volist name="ORDER" id="v" key='k'>
+	                    <option value="{$k}" <eq name="k" value="$isorder">selected</eq>>{$v}</option>
+	                </volist>
+                </select>
+
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="11">
+			<label class='control-label'>录入者：</label>
+			<div class='input-text col-md-4'>
+				<input type='text' class='form-control input-sm' readonly="readonly" value='{$type_in}'>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="12" data='22'>
+			<label class='col-md-2 control-label' for='consult1'>咨询方式：</label>
+			<div class='input-text col-md-4'>
+				<select name='consult' id='consult' class='form-control input-sm'>
+					<volist name="consultlist" id="v">
+	                    <option value="{$v.consult_name}" <eq name="v.consult_name" value="$consult">selected</eq>>{$v.consult_name}</option>
+	                </volist>
+                </select>
+			</div>
+		</div>
+		
+		<div class='form-group1 long' rel="13" data='23'>
+			<label class='col-md-2 control-label' for='bingzheng1'>病症：</label>
+			<div class='input-text col-md-9'>
+				<textarea name='bingzheng' id='bingzheng' class='form-control input-sm' rows='3'>{$bingzheng}</textarea>
+			</div>
+		</div>
+		
+		<div class='form-group1 long' rel="14" data='24'>
+			<label class='col-md-2 control-label' for='remark1'>回访记录：</label>
+			<div class='input-text col-md-9'>
+				<textarea name='remark' id='remark' class='form-control input-sm' rows='3' disabled='disabled' style='background:#fff;'>{$remark}</textarea>
+			</div>
+		</div>
+		
+		<div class='form-group1 long' rel="15" data='25'>
+			<label class='col-md-2 control-label' for='description'>新增回访：</label>
+			<div class='input-text col-md-9'>
+				<textarea name='description' id='description' class='form-control input-sm' rows='2'></textarea>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="16">
+			<label class='col-md-2 control-label' for='callback1'>回访：</label>
+			<div class='input-text col-md-4'>
+				<select name='huifang' id='huifang' class='form-control input-sm'>
+					<volist name="huifanglist" id="v">
+	                    <option value="{$v.callback_name}" <eq name="v.callback_name" value="$huifang">selected</eq>>{$v.callback_name}</option>
+	                </volist>
+                </select>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="17">
+			<label class='control-label' for='time1'>时间：</label>
+			<div class='input-text col-md-4'>
+				<input type='text' name='time' id='time' class='form-control input-sm' value='{$time}'>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="18" data='26'>
+			<label class='col-md-2 control-label' for='info_channel1' >信息渠道：</label>
+			<div class='input-text col-md-4'>
+				<select name='info_channel' id='info_channel' class='form-control input-sm'>{$info_channel}</select>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="19" data='27'>
+			<label class='control-label' for='source_url1'>来源网址：</label>
+			<div class='input-text col-md-4'>
+				<input type='text' class='form-control input-sm' id='source_url' name='source_url' value='{$source_url}'>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="20">
+			<label class='col-md-2 control-label' for='identitys1'>永久身份：</label>
+			<div class='input-text col-md-4'>
+				<input type='text' class='form-control input-sm' id='identitys' name='identitys' value='{$identitys}'>
+			</div>
+		</div>
+		
+		<div class='form-group1' rel="21">
+			<label class='col-md-2 control-label' for='keyword1'>关键词：</label>
+			<div class='input-text col-md-4'>
+				<input type='text' class='form-control input-sm' id='keyword' name='keyword' value='{$keyword}'>
+			</div>
+		</div>
+		<div class='form-group1' rel="22">
+			<label class='control-label' for='source_web1'>来源网站：</label>
+			<div class='input-text col-md-4'>
+				<select name='source_web' id='source_web' class='form-control input-sm'>{$source_web}</select>
+			</div>
+		</div>
+	</form>
+</div>
+<div class='modal-footer'>
+	<button type='button' id='buttons_kfedit' class='btn btn-primary'>确定</button>
+	<button type='button' class='btn btn-default'data-dismiss='modal'>关闭</button>
+</div>
+<link href="/Public/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<script src="/Public/js/datepicker/js/jquery.datepicker.js"></script> 
+
+<script>
+	$(function(){
+	   $("#time").datepicker();   
+	})
+	$('#keshi').change(function() {
+		var keshi = $("#keshi").val();  
+		$.ajax({
+			type: 'POST',
+			url: "{:U('Index/ks_ajax')}",
+			data: {
+				'keshi': keshi
+			},
+			dataType: 'json',
+			success: function(json) { 
+				$("#bingzhong").empty();
+				var list = json.list;
+				var option = "";
+				$.each(list,
+				function(index, array) {
+					option += "<option value='" + array['bingzhong_name'] + "'>" + array['bingzhong_name'] + "</option>"
+				});
+				$("#bingzhong").append(option)
+			}
+		})
+	});
+	/**
+	 * 提交表单
+	 */
+	$("#buttons_kfedit").click(function() { 
+		var data = $('#EditkfForm').serializeArray();
+		$.ajax({
+			type: 'POST',
+			url: "{:U('Index/dy_edit')}",
+			data: {'data': data},
+            dataType: 'json',
+	        success: function(json) {
+				if(json.state==1){
+				      window.location.reload();
+				}else{
+					alert('修改失败，请核对后重试！');
+				}
+		    },
+
+        });	
+	})
+</script>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+var bzxuanzhe_ajax="{:U('Index/kssection_ajax')}";
+var yzphone_ajax="{:U('Index/yzphone_ajax')}";
+var yyadd="{:U('Index/add_ajax')}";
+var right="{:U('Index/right')}";
+var calls="{:U('Index/calls')}";
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper"> <include file="Public:position" />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <form  class="form-horizontal" role="form" id="AddkfForm">
+            <div class="panel panel-default">
+              <div class="panel-heading">客户基本信息</div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="username">姓名：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="username" class="form-control input-sm" id="username" placeholder="必填">
+              </div>
+              <label class="col-md-1 control-label" for="phone">电话：</label>
+              <div class="input-text col-md-2">
+                <input type="text"  name="phone" class="form-control input-sm" id="phone" placeholder="必填">
+                <label id="sj_error" class='error' style="display:none;"></label>
+              </div>
+              <label class="col-md-1 control-label" for="sex">性别：</label>
+              <div class="input-text col-md-2">
+                <label class="checkbox-inline">
+                  <input type="radio" name="sex" id="sex2" value="2" checked>
+                  女 </label>
+                <label class="checkbox-inline">
+                  <input type="radio" name="sex" id="sex1"  value="1">
+                  男 </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="age">年龄：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="age" class="form-control input-sm" id="age">
+              </div>
+              <label class="col-md-1 control-label" for="qq">QQ：</label>
+              <div class="input-text col-md-2">
+                <input type="text"  name="qq" class="form-control input-sm" id="qq">
+              </div>
+              <label class="col-md-1 control-label" for="isorder">预约：</label>
+              <div class="input-text col-md-2">
+                <select name="isorder" id="isorder" class="form-control input-sm">
+                <if condition="$m_id eq 5 "><option value="1">预约</option>
+               <else /> 
+                  <option value="1">预约</option>
+                  <option value="0">登记</option>
+               </if> 
+                </select>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">预约挂号信息</div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="keshi">科室：</label>
+              <div class="input-text col-md-2">
+                <select name="keshi" id="keshi" class="form-control input-sm">
+                  <option value="">--请选择--</option>
+                  <volist name="keshilist" id="data">
+                    <option value="{$data.id}">{$data.section_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="col-md-3 control-label" for="time">预约时间：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="time" id="time" class="form-control input-sm" placeholder="必选">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="bingzhong">病种：</label>
+              <div class="input-text col-md-2">
+                <select name="bingzhong" id="bingzhong" class="form-control input-sm">
+                </select>
+              </div>
+              <label class="col-md-3 control-label" for="area">地区：</label>
+              <div class="input-text col-md-2">
+                <select name="area" id="area" class="form-control input-sm">
+                  <option value="">--请选择--</option>
+                  <volist name="arealist" id="data">
+                    <option value="{$data.id}">{$data.area_name}</option>
+                  </volist>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="bingzheng">病症：</label>
+              <div class="input-text col-md-3">
+                <textarea  name="bingzheng"  id="bingzheng" class="form-control input-sm" rows="6"></textarea>
+              </div>
+              <label class="col-md-2 control-label" for="remark">备注：</label>
+              <div class="input-text col-md-3">
+                <textarea name="remark"  id="remark" class="form-control input-sm" rows="6"></textarea>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">营销渠道信息</div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="consult">咨询方式：</label>
+              <div class="input-text col-md-2">
+                <select name="consult" id="consult" class="form-control input-sm">
+                  <volist name="consultlist" id="data">
+                    <option value="{$data.id}">{$data.consult_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="col-md-3 control-label" for="type_in">录入者：</label>
+              <div class="input-text col-md-2">
+                 <if condition="($quanxian lt 2)">
+                      <select name="type_in" id="type_in" class="form-control input-sm">
+                        <option value="0">--请选择--</option>
+                        <volist name="zxylist" id="data">
+                          <option value="{$data.name}">{$data.name}</option>
+                        </volist>
+                      </select>
+                  <else />
+                      <input type="text" name="type_in" id="type_in" value="{$Think.session.username}" class="form-control input-sm">
+                  </if>
+                
+              </div>
+
+
+              <label class="col-md-1 control-label" for="info_channel" style="display:none;">信息渠道：</label>
+              <div class="input-text col-md-2" style="display:none;">
+                <select name="info_channel" id="info_channel" class="form-control input-sm">
+                  <volist name="qudaoinfolist" id="data">
+                    <option value="{$data.id}">{$data.info_name}</option>
+                  </volist>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="display:none;">
+              <label class="col-md-3 control-label" for="source_web">来源网站：</label>
+              <div class="input-text col-md-2">
+                <select name="source_web" id="source_web" class="form-control input-sm">
+                  <volist name="weblist" id="data">
+                    <option value="{$data.id}">{$data.web_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="col-md-3 control-label" for="source_url">来源网址：</label>
+              <div class="input-text col-md-2">
+                <input type="source_url" name="source_url" class="form-control input-sm" id="source_url">
+              </div>
+            </div>
+            <div class="form-group" style="display:none;">
+              <label class="col-md-1 control-label">永久身份：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" id="identitys" name="identitys">
+              </div>
+            </div>
+            <div class="form-group" style="display:none;">
+              <label class="col-md-3 control-label" for="marketing">营销方式：</label>
+              <div class="input-text col-md-2">
+                <select name="marketing" id="marketing" class="form-control input-sm">
+                  <volist name="yingxiaolist" id="data">
+                    <option value="{$data.id}">{$data.yingxiao_name}</option>
+                  </volist>
+                </select>
+              </div>
+              <label class="col-md-1 control-label" for="keyword">关键词：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="keyword" id="keyword" class="form-control input-sm">
+              </div>
+            </div>
+            <div class="form-group pd-20">
+              <div class="col-md-5  col-md-offset-5">
+                <button type="submit" class="submitbtn btn btn-primary col-md-2  col-sm-12 col-xs-12">提交</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script> 
+<script src="__PUBLIC__/js/validation/jquery.validate.min.js"></script> 
+<script src="__PUBLIC__/js/validation/messages_zh.js"></script> 
+<script>
+$(function(){
+$( "#time" ).datepicker();      
+$('#phone').blur(function() {
+var phonenum = $(this).val();
+if(phonenum){
+$.ajax({      
+type: 'POST',
+url: yzphone_ajax,
+data: {'phone':phonenum},
+dataType: 'json',
+beforeSend: function () {
+$('#sj_error').empty();
+        },
+success: function(results) {
+if(results.states==1){  
+$('#sj_error').show();
+$('#sj_error').append('电话号码有重复，请确定是否是夫妻号！');
+
+}else{
+$('#sj_error').hide();
+$('#sj_error').empty();
+  }
+
+
+}
+      });
+}
+});
+
+  
+  $("#AddkfForm").validate({
+    rules:
+    {
+    username: "required",
+    time:"required",
+    keshi: "required",
+    bingzhong:"required",
+    area:"required",
+    consult:"required",
+    info_channel:"required",
+    marketing:"required",
+    
+    },
+    messages:
+    {
+      username: "姓名不能为空！",
+    time: "时间不能为空！",
+    keshi: "科室必须选择",
+    bingzhong:"病种必须选择",
+    area:"地区必须选择",
+    consult:"咨询方式必须选择",
+    info_channel:"信息渠道必须选择",
+    marketing:"营销方式必须选择", 
+     
+    },
+  submitHandler: function(form) {
+        $.ajax({  
+            url : yyadd,  
+            type : "post",  
+            dataType : "json",  
+            data : $('#AddkfForm').serialize(),
+            beforeSend: function(){
+            $('.submitbtn').attr('disabled','disabled');
+            },
+            success : function(data) {
+            if(data.state==1){
+            if(data.dumpurl=='dengji'){
+
+
+            location.href=right;
+
+
+              }
+
+            if(data.dumpurl=='calls'){
+
+            location.href=calls;
+              }
+              }else{
+
+                alert('添加失败，请重试！');
+
+                }
+              }  
+        }); 
+
+    },  
+         invalidHandler: function(form, validator) {
+       return false;  
+          }  
+  });
+      $("#keshi").change(function() {
+      var keshi_val = $("#keshi").val();
+      $.ajax({
+        type: 'POST',
+        url: bzxuanzhe_ajax,
+        data: {
+          'keshi_val': keshi_val
+        },
+        dataType: 'json',
+        success: function(json) {
+          $("#bingzhong").empty();
+          var list = json.list;
+        var option = "";
+          $.each(list,
+          function(index, array) {
+            option += "<option value='" + array['id'] + "'>" + array['bingzhong_name'] + "</option>"
+          });
+          $("#bingzhong").append(option)
+        }
+      })
+    });
+
+});
+</script>
+</body>
+</html>

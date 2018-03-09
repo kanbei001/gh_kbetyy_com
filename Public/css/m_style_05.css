@@ -1,0 +1,67 @@
+/* CSS Document */
+
+*{list-style:none; font-style:normal; font-weight:normal;}
+body{font-size:62.5%; padding:0px; margin:0px;}
+a{ text-decoration:none; color:#303030;}
+div, h1, h2, h3, h4, p, form, label, input, textarea, img, span ,ol{
+	margin:0; padding:0;
+}
+body{
+	padding:0;
+	margin:0;
+	font-family:"微软雅黑";
+	background:url(/Public/images/main_bg.gif) 0 0 repeat-x #fff;
+	color:#9F9F9F;
+}
+.spacer{
+	clear:both; 
+	font-size:0; 
+	line-height:0;}
+
+
+
+
+.top{ height:5.3em; background:#5aa9e1; padding-top:0.7em;}
+.top .p{width:24em; height:2.5em; line-height:2.5em; margin:0 auto; text-align:center;
+      -moz-border-radius: 1.2em;      /* Gecko browsers */
+      -webkit-border-radius: 1.2em;   /* Webkit browsers */
+      border-radius:1.2em; background:#FFF;    position: relative;}
+	  
+.top .sea{
+    position: absolute;
+    top: 0.9rem;
+    right: 5.5rem;
+    width: 4rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+}
+
+.banner{display: inline-block;vertical-align:middle;}
+
+.day{ background:#607cb5; height:6em;}
+.day p a{ display:block; width:25%; font-size:2.2em; font-weight:bold; color:#FFF; text-align:center; float:left;line-height: 1.8rem;}
+.day p a span{display:block; color:#FFF;}
+.day p a.hove{ width:25%; height:3.3em; background:#5aa9e1; -moz-border-radius: 1em;      /* Gecko browsers */
+      -webkit-border-radius: 1em;   /* Webkit browsers */
+      border-radius:1em; }
+	  
+	  
+.tablev{ margin-top:4em;}	  
+.tablev ul li{ 
+      width:8em; height:3em; line-height:3em; float:left; margin-left:4.3em; text-align:center; font-size:1.6em; background:#5aa9e1; 
+	  -moz-border-radius: 0.6em;      /* Gecko browsers */
+      -webkit-border-radius: 0.6em;   /* Webkit browsers */
+      border-radius:0.6em;
+	  color:#FFF;
+	  font-weight:bold;}
+	  
+	  
+table tr td{ color:#303030;}	  
+table tr td a.qr{ vertical-align:top; display:block; color:#FFF; background:#fc6104; width:5em; margin:0 auto; height:2em; line-height:2em;  -moz-border-radius: 0.4em;      /* Gecko browsers */
+      -webkit-border-radius: 0.4em;   /* Webkit browsers */
+      border-radius:0.4em;} 	  
+
+.tab_top{color:#FFF; font-size:1.6em; height:2.7em; line-height:2.7em; text-align:center; font-weight:bold;}
+.tab_top_t{font-size:1.4em; height:4em; line-height:4em; text-align:center;}
+.tab_top_tr{font-size:1.4em; height:3em; text-align:center;}/*确认按钮*/

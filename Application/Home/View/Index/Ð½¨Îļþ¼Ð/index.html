@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script>
+var ajax_monthgoal_charts="{:U('Index/ajax_monthgoal_charts')}";
+var zxdy_ajaxlist="{:U('Index/zxdy_ajaxlist')}";
+var qdxx_ajaxlist="{:U('Index/qdxx_ajaxlist')}";
+var lywz_ajaxlist="{:U('Index/lywz_ajaxlist')}";
+var ajax_jiduchart="{:U('Index/ajax_jiduchart')}";
+
+
+</script>
+</head>
+
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper">
+  <nav class="navbreadcrumb"><i class="fa fa-dashboard"></i> <a href="{:U('Index/index')}">首页</a> > {$main_menu}<a class="flush_btn hidden-xs" href="javascript:location.replace(location.href);" title="刷新"><i class="fa  fa-repeat"></i> 刷新</a><a class="flush_btn hidden-xs" href="{:U('Index/index')}" title="返回首页"><i class="fa  fa-home"></i> 返回首页</a></nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading"> <i class="fa fa-bar-chart-o fa-fw"></i> 信息统计 </div>
+            <div class="panel-body" style="padding:0;">
+              <div class="table-responsive" style="margin-bottom:0;">
+                <table class="table table-bordered table-hover table-striped" style="border-left:0; border-right:0;">
+                  <thead>
+                    <tr>
+                      <th style=" border-right:0; border-left:0;">网挂</th>
+                      <th>预约</th>
+                      <th>预到</th>
+                      <th>实到</th>
+                      <th>未到</th>
+                      <th>待诊</th>
+                      <th style=" border-right:0; border-left:0;">到率</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style=" border-right:0; border-left:0;">明日</td>
+                      <td>-</td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'tomorrow_yudao'))}">{$arr['tomorrow_yd']}</a></td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'tomorrow_gaiyue'))}">{$arr['tomorrow_dz']}</a></td>
+                      <td style=" border-right:0; border-left:0;">-</td>
+                    </tr>
+                    <tr>
+                     <td style=" border-right:0; border-left:0;">今日</td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'today_add'))}">{$arr['today_yy']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'today_yudao'))}">{$arr['today_yd']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'today_yidao'))}">{$arr['today_dy']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'today_weidao'))}">{$arr['today_wd']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'today_gaiyue'))}">{$arr['today_dz']}</a></td>
+                      <td style=" border-right:0; border-left:0;">{$arr['today_bfb']}</td>
+                    </tr>
+                    <tr>
+                     <td style=" border-right:0; border-left:0;">昨日</td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'yesterday_add'))}">{$arr['yesterday_yy']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'yesterday_yudao'))}">{$arr['yesterday_yd']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'yesterday_yidao'))}">{$arr['yesterday_dy']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'yesterday_weidao'))}">{$arr['yesterday_wd']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'yesterday_gaiyue'))}">{$arr['yesterday_dz']}</a></td>
+                     <td style=" border-right:0; border-left:0;">{$arr['yesterday_bfb']}</td>
+                    </tr>
+                    <tr>
+                    <td style=" border-right:0; border-left:0;">本月</td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'dangyue_add'))}">{$arr['month_yy']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'dangyue_yudao'))}">{$arr['month_yd']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'dangyue_yidao'))}">{$arr['month_dy']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'dangyue_weidao'))}">{$arr['month_wd']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'dangyue_gaiyue'))}">{$arr['month_dz']}</a></td>
+                     <td style=" border-right:0; border-left:0;">{$arr['month_bfb']}</td>
+                    </tr>
+                    <tr>
+                     <td style=" border-right:0; border-left:0;">上月</td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'shangyue_add'))}">{$arr['lastmonth_yy']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'shangyue_yudao'))}">{$arr['lastmonth_yd']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'shangyue_yidao'))}">{$arr['lastmonth_dy']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'shangyue_weidao'))}">{$arr['lastmonth_wd']}</a></td>
+                      <td><a href="{:U('Index/jianbao',array('info'=>'shangyue_gaiyue'))}">{$arr['lastmonth_dz']}</a></td>
+                     <td style=" border-right:0; border-left:0;">{$arr['lastmonth_bfb']}</td>
+                    </tr>
+                    <tr>
+                     <td style=" border-right:0; border-left:0;">同期对比</td>
+                      <td>{$arr['tqyycz']}</td>
+                      <td>{$arr['tqydcz']}</td>
+                      <td>{$arr['tqsdcz']}</td>
+                      <td>{$arr['tqwdcz']}</td>
+                      <td>{$arr['tqdzcz']}</td>
+                      <td style=" border-right:0; border-left:0;">{$arr['tqbfbcz']}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-heading"> <i class="fa fa-line-chart fa-fw"></i> 月到院目标完成情况 </div>
+            <div class="panel-body" style="padding:0;">
+              <div id="monthgoal_charts" style="min-height:240px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-user fa-fw"></i> 咨询到院排行
+              <div class="pull-right">
+                <div class="btn-group">
+                  <select class="btn btn-default btn-xs rq-select" id="zxphb_nav">
+                    <option value="zxdy_ssy">上上月</option>
+                    <option value="zxdy_sy">上月</option>
+                    <option value="zxdy_by">本月</option>
+                    <option value="zxdy_zt" selected="selected">昨天</option>
+                    <option value="zxdy_jt">今天</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" style="padding:0;">
+              <div class="table-responsive table_phb">
+                <table class="table table-bordered table-hover table-striped" id="zxphb" style="border-left:0;">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading"> <i class="fa fa-clone fa-fw"></i> 渠道信息排行
+              <div class="pull-right">
+                <div class="btn-group">
+                  <select class="btn btn-default btn-xs rq-select" id="qdxxphb_nav">
+                    <option value="qdxx_ssy">上上月</option>
+                    <option value="qdxx_sy">上月</option>
+                    <option value="qdxx_by">本月</option>
+                    <option value="qdxx_zt" selected="selected">昨天</option>
+                    <option value="qdxx_jt">今天</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" style="padding:0;">
+              <div class="table-responsive table_phb">
+                <table class="table table-bordered table-hover table-striped" id="qdxxphb" style="border-left:0;">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading"> <i class="fa fa-navicon fa-fw"></i> 来源网站排行
+              <div class="pull-right">
+                <div class="btn-group">
+                  <select class="btn btn-default btn-xs rq-select" id="lywzphb_nav">
+                    <option value="lywz_ssy">上上月</option>
+                    <option value="lywz_sy">上月</option>
+                    <option value="lywz_by">本月</option>
+                    <option value="lywz_zt" selected="selected">昨天</option>
+                    <option value="lywz_jt">今天</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" style="padding:0;">
+              <div class="table-responsive table_phb">
+                <table class="table table-bordered table-hover table-striped" id="lywzphb" style="border-left:0;">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading"> <i class="fa fa-area-chart fa-fw"></i> 季度预约/到院人数
+              <div class="pull-right">
+                <div class="btn-group">
+                  <select class="btn btn-default btn-xs rq-select" id="jdinfo">
+                    <option value="jd_ssy">上上月</option>
+                    <option value="jd_sy" >上月</option>
+                    <option value="jd_by" selected="selected">本月</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body" style="padding:0;">
+              <div id="jiduchartcontent" style="min-height:250px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/Highcharts/js/highcharts.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/Highcharts/js/modules/exporting.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/indexajax.js"></script>
+</body>
+</html>

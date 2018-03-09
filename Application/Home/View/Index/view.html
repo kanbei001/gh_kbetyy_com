@@ -1,0 +1,168 @@
+<style>
+    .modal-dialog {width: 600px;} 
+    .modal-dialog .form-horizontal { display: inline-block; margin-top: -15px; } 
+    .modal-dialog .form-horizontal .control-label { width: 50px;padding-left: 0 !important; } 
+    .modal-dialog .col-md-9 { width: 98%;margin-left: 5px; } 
+    .modal-dialog .form-horizontal .table,.table .form-group1{border: 1px solid #b5d6e6;}
+    .modal-dialog .form-horizontal .table{display: inline-block; margin-top: -5px;}
+    .modal-dialog .form-horizontal .table3{padding-bottom: 5px;}
+    .modal-dialog .form-horizontal .table .head { font-weight: bold; text-align: left; text-indent: 8px; width: 100% !important; border-bottom: 1px solid #b5d6e6;padding-bottom: 5px;margin-bottom: 0;}
+    .modal-dialog .form-group1 { display: inline-table; float: left; width: 30%; border-right: none;border-bottom: none;} 
+    .modal-dialog .form-group1:nth-child(3n+1){width: 40%;}
+    .modal-dialog .form-group1:nth-child(3n+2){border-left: none;} 
+    .modal-dialog .col-md-4 {line-height: 30px;text-align: left;width: unset;}
+    .modal-dialog .long{width: 100%;}
+
+</style>
+
+<if condition="($quanxian lt 3)">
+	<style>
+       .modal-dialog {margin-top: 100px !important;} 
+    </style>
+<elseif condition="($quanxian eq 3) OR ($quanxian eq 5)"/>
+   <script> 
+        $('div[rel^=2]').prop('outerHTML', '');
+   </script>
+<else />
+	<script>
+		$('div[rel^=2]').prop('outerHTML', '');
+		$('div[rel=31]').prop('outerHTML', '');
+	</script>
+</if>
+
+<div class='modal-body'>
+	<form class='form-horizontal' role='form' id='EditkfForm'>
+	<div class="table1 table">
+		<div class="control-label head">客户基本信息</div>
+
+		<div class='form-group1'>
+			<label class='col-md-2 control-label' style="width: 60px;">预约号：</label>
+			<div class='input-text col-md-4'>{$yuyue}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='control-label'>姓名：</label>
+			<div class='input-text col-md-4'>{$username}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='control-label' style="width: 70px;">登记时间：</label>
+			<div class='input-text col-md-4'>{$in_time}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='col-md-2 control-label'>电话：</label>
+			<div class='input-text col-md-4'>{$phone}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='col-md-2 control-label'>地区：</label>
+			<div class='input-text col-md-4'>{$area}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='control-label'>Q&nbsp;&nbsp;Q：</label>
+			<div class='input-text col-md-4'>{$qq}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='control-label'>性别：</label>
+			<div class='input-text col-md-4'>{$SEX[$sex]}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='col-md-2 control-label'>年龄：</label>
+			<div class='input-text col-md-4'>{$age}</div>
+		</div>
+		
+		<div class='form-group1' rel='20'>
+			<label class='col-md-2 control-label' style="width: 70px;">是否来院：</label>
+			<div class='input-text col-md-4'>{$laiyuan}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='col-md-2 control-label' style="width: 70px;">来院时间：</label>
+			<div class='input-text col-md-4'>{$laiyuan_time=='---'?"未来院":$laiyuan_time}</div>
+		</div>
+		
+		<div class='form-group1' rel='21'>
+			<label class='col-md-2 control-label' style="width: 60px;">关键词：</label>
+			<div class='input-text col-md-4'>{$keyword}</div>
+		</div>
+		
+		<div class='form-group1' rel='22'>
+			<label class='control-label' style="width: 70px;">来源网站：</label>
+			<div class='input-text col-md-4'>{$source_web}</div>
+		</div>
+	</div>	
+	
+	<div class="table2 table">
+		<div class="control-label head">预约挂号信息</div>
+
+		<div class='form-group1'>
+			<label class='col-md-2 control-label'>科室：</label>
+			<div class='input-text col-md-4'>{$keshi}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='control-label'>病种：</label>
+			<div class='input-text col-md-4'>{$bingzhong}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='col-md-2 control-label' style="width: 70px;">预约医生：</label>
+			<div class='input-text col-md-4'>{$doctor}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='control-label' style="width: 70px;">预约时间：</label>
+			<div class='input-text col-md-4'>{$time}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='col-md-2 control-label'>回访：</label>
+			<div class='input-text col-md-4'>{$huifang}</div>
+		</div>
+		
+		<div class='form-group1'>
+			<label class='control-label' style="width: 60px;">录入者：</label>
+			<div class='input-text col-md-4'>{$type_in}</div>
+		</div>
+		
+		<div class='form-group1' rel="23">
+			<label class='col-md-2 control-label' style="width: 70px;">咨询方式：</label>
+			<div class='input-text col-md-4'>{$consult}</div>
+		</div>
+		
+		<div class='form-group1' rel="24">
+			<label class='col-md-2 control-label' style="width: 70px;">营销方式：</label>
+			<div class='input-text col-md-4'>{$marketing}</div>
+		</div>
+		
+		<div class='form-group1' rel="25">
+			<label class='control-label' style="width: 95px;">获取信息渠道：</label>
+			<div class='input-text col-md-4'>{$info_channel}</div>
+		</div>
+	</div>	
+	
+	<div class="table3 table">
+		<div class="control-label head">患者跟踪信息</div>
+		<div class='form-group1 long'>
+			<label class='col-md-2 control-label'>病症：</label>
+			<div class='input-text col-md-9'>
+				<textarea class='form-control input-sm' rows='3'>{$bingzheng}</textarea>
+			</div>
+		</div>
+		
+		<div class='form-group1 long' rel='31' style="margin-top: 5px;border-left: none;">
+			<label class='col-md-2 control-label' style="width: 70px;">回访记录：</label>
+			<div class='input-text col-md-9'>
+				<textarea class='form-control input-sm' rows='3' style='background:#fff;'>{$remark}</textarea>
+			</div>
+		</div>
+	</div>	
+	</form>
+</div>
+<div class='modal-footer'>
+	<button type='button' class='btn btn-default'data-dismiss='modal'>关闭</button>
+</div>

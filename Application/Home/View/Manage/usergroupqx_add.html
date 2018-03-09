@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper">
+  <include file="Public:position" />
+    <div class="container-fluid">
+
+
+          <form class="form-horizontal" action="{:U('Manage/usergroupqx_add_submit')}" method="post" role="form">
+            <div class="row" style="margin-bottom:10px;">
+              <label class="usergroup-label control-label"><span class="c-red">*</span>用户组：</label>
+              <div class="input-text col-md-2">
+                <input type="text" class="form-control input-sm" name="group_name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="formControls">
+                  <volist name="menus" id="vo">
+                    <dl class="permission-list">
+                      <dt>
+                        <div class="checkbox">
+                          <label style="font-size:14px;">
+                            <input type="checkbox"  name="checkboxall[]" id="{$vo.qx_id}" value="{$vo.qx_id}">
+                            &nbsp;{$vo.qx_name}</label>
+                        </div>
+                      </dt>
+                      <dd>
+                        <dl class="cl permission-list2">
+                          <volist name="vo['children']" id="v">
+                            <dt style="width:120px;">
+                              <div class="checkbox">
+                                <label style="font-size:14px;">
+                                  <input type="checkbox" name="checkbox[]" id="child{$v.id}" value="{$v.id}">
+                                  {$v.qx_name_1}</label>
+                              </div>
+                            </dt>
+                          </volist>
+                        </dl>
+                      </dd>
+                    </dl>
+                  </volist>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class=" col-md-5 addbtn">
+                <button type="submit" class="btn  btn-primary  col-md-1 col-sm-12 col-xs-12" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+              </div>
+            </div>
+          </form>
+
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/validation/jquery.validate.min.js"></script> 
+<script src="__PUBLIC__/js/validation/messages_zh.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$(".permission-list dt input:checkbox").click(function(){
+		$(this).closest("dl").find("dd input:checkbox").prop("checked",$(this).prop("checked"));
+	});
+	$(".permission-list2 dd input:checkbox").click(function(){
+		var l =$(this).parent().parent().find("input:checked").length;
+		var l2=$(this).parents(".permission-list").find(".permission-list2 dd").find("input:checked").length;
+		if($(this).prop("checked")){
+			$(this).closest("dl").find("dt input:checkbox").prop("checked",true);
+			$(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked",true);
+		}
+		else{
+			if(l==0){
+				$(this).closest("dl").find("dt input:checkbox").prop("checked",false);
+			}
+			if(l2==0){
+				$(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked",false);
+			}
+		}
+	});	
+	
+});
+</script>
+</body>
+</html>

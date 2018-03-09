@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper">
+  <include file="Public:position" />
+    <div class="container-fluid">
+      
+      <form class="form-horizontal" action="{:U('Compare/ksduibi')}"  method="post" role="form">
+    <div class="row pd-10">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="form-group pd-0">
+              <label class="control-label">查询从：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="start_date" class="form-control input-sm"  id="start_date">
+              </div>
+              <label class="control-label">到：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="en_date" class="form-control input-sm"  id="en_date">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pd-10">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="form-group pd-0">
+              <label class="control-label">查询从：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="start_date_1" class="form-control input-sm"  id="start_date_1">
+              </div>
+              <label class="control-label">到：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="en_date_1" class="form-control input-sm"  id="en_date_1">
+              </div>
+              <div class="col-md-2 text-center pd-top-10">
+                <button type="submit" class="btn btn-primary btn-sm col-md-5 col-sm-12 col-xs-12 btn-block" id="search_btn">统计</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-12">
+          <h3 style="text-align:center; color:#000; margin-top:10px;">到院科室对比</h3>
+          <div class="table-responsive"><table class="table table-bordered table-hover table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>日期</th>
+                  <volist name="posts" id="vo">
+                    <th>{$vo.section_name}</th>
+                  </volist>
+                  <th>合计</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>{$riqi['start_date']|date="Y-m-d",###} 至 {$riqi['en_date']|date="Y-m-d",###}</td>
+                  <volist name="dynumbers" id="vv">
+                    <td>{$vv}</td>
+                  </volist>
+                </tr>
+                <tr class="text-center">
+                  <td>{$riqi['start_date1']|date="Y-m-d",###} 至 {$riqi['en_date1']|date="Y-m-d",###}</td>
+                  <volist name="dynumbers2" id="vv">
+                    <td>{$vv}</td>
+                  </volist>
+                </tr>
+                <tr class="text-center">
+                  <td>对比</td>
+                  <volist name="dychazhi" id="vv">
+                    <td>{$vv}</td>
+                  </volist>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  <br/>
+          <h3 style="text-align:center; color:#000; margin-top:10px;">预约科室对比</h3>
+          <div class="table-responsive"><table class="table table-bordered table-hover table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>日期</th>
+                  <volist name="posts" id="vo">
+                    <th>{$vo.section_name}</th>
+                  </volist>
+                  <th>合计</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>{$riqi['start_date']|date="Y-m-d",###}至{$riqi['en_date']|date="Y-m-d",###}</td>
+                  <volist name="yynumbers" id="vv">
+                    <td>{$vv}</td>
+                  </volist>
+                </tr>
+                <tr class="text-center">
+                  <td>{$riqi['start_date1']|date="Y-m-d",###}至{$riqi['en_date1']|date="Y-m-d",###}</td>
+                  <volist name="yynumbers2" id="vv">
+                    <td>{$vv}</td>
+                  </volist>
+                </tr>
+                <tr class="text-center">
+                  <td>对比</td>
+                  <volist name="dychazhi2" id="vv">
+                    <td>{$vv}</td>
+                  </volist>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script>
+<script>
+$(function(){
+$("#start_date,#en_date,#start_date_1,#en_date_1").datepicker();   
+})
+</script> 
+</body>
+</html>

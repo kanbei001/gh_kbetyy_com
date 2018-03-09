@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/css/m_style_05.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+var daoyi_ajax="{:U('Index/daoyi_ajax')}";
+var fenzhen_ajax="{:U('Index/fenzhen_ajax')}";
+var daoyisearch_ajax="{:U('Index/daoyisearch_ajax')}";
+</script>
+</script>
+</head>
+<body>
+<div style="margin:0; padding:0;display:block;">
+<!--top搜索-->
+<div class="top">
+<!-- <p>
+    <a href="#"></a>
+</p> -->
+ <form class="form-horizontal" role="form" onsubmit="return false;">
+      <input type="text" class="form-control input-sm p" id="words" name="words" placeholder="搜索到院病人">
+      <input type="hidden" id="date" name="date" value="3">
+      <span class="fa fa-search sea" id="daoyi_btns"></span>
+ </form>
+</div>
+<!--banner-->
+<div class="banner"><img src="__PUBLIC__/images/sousuo1_06.jpg" width="100%"></div>
+<!--日期-->
+<div class="day">
+<p>   
+      <a class="settags" data='0' style="line-height: 3.5rem">全部</a>  <!--本月-->
+      <a class="hove settags" data='3'>今天<span>{$date.jin}</span></a>
+      <a class="settags" data='4'>明天<span>{$date.min}</span></a>
+      <a class="settags" data='5'>后天<span>{$date.hou}</span></a>
+	
+</p>
+</div><br / class="spacer">
+
+<!--table-->
+<div class="table">
+
+<table width="100%" border="0" cellspacing="1">  
+  <tr>
+  	<td width='15%' bgcolor='#5aa9e1' class='tab_top'>预约号</td>
+    <td width="20%" bgcolor="#5aa9e1" class="tab_top">姓名</td>
+    <td width="20%" bgcolor="#5aa9e1" class="tab_top">电话</td>
+    <td width="23%" bgcolor="#5aa9e1" class="tab_top">病种</td>
+    <td width="22%" bgcolor="#5aa9e1" class="tab_top">确认到院</td>
+  </tr>
+  <tbody id="ajax"></tbody>
+</table>
+<div id="pageNavs" class="pageNavcommon"></div>
+ <div id="pageNavs_sousuo" class="pageNavcommon"></div>
+</div>
+</div>
+<div class="modal" id="info-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+
+<div class="modal" id="fz-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form class="form-horizontal" role="form">
+        <input type="hidden" name="fzid" id="fzid">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">分诊信息</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-md-4 control-label">选择医生科室：</label>
+            <div class="col-md-3 xzdoc">
+              <select name="doctors" id="doctors" class="form-control input-sm">
+                <option value="0">-请选择-</option>
+                <volist name="doctorsectionlist" id="data">
+                  <option value="{$data.id}">{$data.name}</option>
+                </volist>
+              </select>
+            </div>
+            <div class="col-md-3 xzdocname">
+              <select name="doctor_section" id="doctor_section" class="form-control input-sm">
+              </select>
+            </div>
+          </div>
+          <div id="error_doctor"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btn_fz" class="btn btn-primary">确定</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal" id="kfedit-modal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"></div>
+<script src="/Public/js/jquery.js"></script> 
+<script src="/Public/js/bootstrap.js"></script> 
+<script src="/Public/js/metisMenu.js"></script> 
+<script src="/Public/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/daoyi_fenye_m.js"></script> 
+<script src="__PUBLIC__/js/daoyi_search_m.js"></script> 
+<script src="__PUBLIC__/js/tanchuang.js"></script>
+<script type="text/javascript"> 
+
+    $(document).on("click", ".mfzicon",function()  { 
+      var rel = $(this).attr('rel');
+      $('#fzid').val(rel);
+      $("#fz-modal-data").modal("toggle");
+    });
+    $('#doctors').change(function() {
+		$('#error_doctor').empty();
+		$('#doctor_section').empty();
+		var section_val = $("#doctors").val();
+		$.ajax({
+			type: 'POST',
+			url: fenzhen_ajax,
+			data: {
+				'section_val': section_val
+			},
+			dataType: 'json',
+			success: function(json) {
+				$("#doctor_section").empty();
+				var list = json.list;
+				var option = "";
+				$.each(list,
+				function(index, array) {
+					option += "<option value='" + array['id'] + "'>" + array['doctor_name'] + "</option>"
+				});
+				$("#doctor_section").append(option)
+			}
+		})
+	});
+    //提交
+    $(document).on("click", "#btn_fz",function() { 
+	var fzysksval = $('#doctors').val();
+	var fzid = $('#fzid').val();  alert(fzysksval);alert(fzid);
+	if (fzysksval == 0) {
+		$('#error_doctor').empty();
+		var html = "<span>您没有选择，请选择!</span>";
+		$('#error_doctor').append(html)
+	} else {
+		var docval = $('#doctor_section').find("option:selected").text();
+		$.ajax({
+			type: 'POST',
+			url: "{:U('Index/fenzhen')}",
+			data: {
+				'docval': docval,
+				'id': fzid
+			},
+			complete: function() {
+				window.location.reload();
+			}
+		})
+	}
+});
+	
+</script>
+</body>
+</html>

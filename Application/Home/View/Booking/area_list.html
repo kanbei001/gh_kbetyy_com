@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/js/datepicker/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper">
+     <include file="Public:position" />
+    <div class="container-fluid">
+      
+      <form class="form-horizontal" action="{:U('Booking/area_list')}"  method="post" role="form">
+        <div class="row pd-10">
+          <div class="col-md-10 col-md-offset-2">
+            <div class="form-group pd-0">
+              <label class="col-md-1 control-label">渠道：</label>
+              <div class="input-text col-md-2">
+                <select name="qudao" id="qudao" class="form-control input-sm">
+                  <option value="1">网络</option>
+                </select>
+              </div>
+              <label class="control-label">登记时间从：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="start_date" class="form-control input-sm"  id="start_date">
+              </div>
+              <label class="control-label">到：</label>
+              <div class="input-text col-md-2">
+                <input type="text" name="en_date" class="form-control input-sm"  id="en_date">
+              </div>
+              <div class="col-md-2 text-center pd-top-10">
+                <button type="submit" class="btn btn-primary btn-sm col-md-5 col-sm-12 col-xs-12 btn-block" id="search_btn">统计</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th>日期</th>
+                  <volist name="posts" id="vo">
+                    <th>{$vo.area_name}</th>
+                  </volist>
+                  <th>合计</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <php>
+              
+              for($i=$riqi['start_date'];$i<=$riqi['en_date'];$i+=(24*3600)){
+                </php>
+              
+              <tr class="text-center">
+                <td><php>echo date('Y-m-d',$i);</php></td>
+                <php> $qudao_id=$riqi['qudao_id'];
+                  $sqls="select * from bk_area ";
+                  $postss=M()->query($sqls);
+                  foreach($postss as $v){
+                  $time_in= strtotime(date('Y-m-d',$i + 1*24*60*60));
+                  
+                  $area=$v['area_name']; </php>
+                <td><php> $sql="select * from bk_kefuinfo where isorder=1 and in_time>='$i' and in_time<='$time_in' and area='$area'";
+                    
+                    
+                    echo count(M()->query($sql)); </php></td>
+                <php> } </php>
+                <td><php> $qudao_id=$riqi['qudao_id'];
+                    $time_ins=strtotime(date('Y-m-d H:i:s',$i + 1*24*60*60));
+                    
+                    $sqls="select * from bk_kefuinfo where isorder=1 and  in_time>='$i' and in_time<='$time_ins' and qudao_group_id='$qudao_id'";
+                    
+                    
+                    echo count(M()->query($sqls)); </php></td>
+              </tr>
+              <php> } </php>
+              <tr class="text-center">
+                <td>合计</td>
+                <php> $qudao_id=$riqi['qudao_id'];
+                  $sqls="select * from bk_area ";
+                  $postss=M()->query($sqls);
+                  foreach($postss as $v){ </php>
+                <td><php> $area=$v['area_name']; 
+                    $qudaoid=$riqi['qudao_id'];
+                    $post_start_date=$riqi['start_date'];
+                    $post_en_date=$riqi['en_date'];
+                    $time_inss=strtotime(date('Y-m-d H:i:s',$post_en_date + 1*24*60*60));
+                    $sql="select * from bk_kefuinfo where isorder=1 and in_time>='$post_start_date' and in_time<='$time_inss' and area='$area' and qudao_group_id='$qudaoid'";
+                    echo count(M()->query($sql)); </php></td>
+                <php> } </php>
+                <td><php> $qudaoid=$riqi['qudao_id'];
+                    $post_start_date=$riqi['start_date'];
+                    $post_en_date=$riqi['en_date'];
+                    $time_inss=strtotime(date('Y-m-d H:i:s',$post_en_date + 1*24*60*60));
+                    $sql="select * from bk_kefuinfo where isorder=1 and in_time>='$post_start_date' and in_time<='$time_inss'  and qudao_group_id='$qudaoid'";
+                    
+                    
+                    echo count(M()->query($sql)); </php></td>
+              </tr>
+              <tr class="text-center">
+                <td>百分比</td>
+                <php> $qudao_id=$riqi['qudao_id'];
+                  $sqls="select * from bk_area ";
+                  $postss=M()->query($sqls);
+                  foreach($postss as $v){ </php>
+                <td><php> $area=$v['area_name']; 
+                    $qudaoid=$riqi['qudao_id'];
+                    $post_start_date=$riqi['start_date'];
+                    $post_en_date=$riqi['en_date'];
+                    $time_inss=strtotime(date('Y-m-d H:i:s',$post_en_date + 1*24*60*60));
+                    $sql="select * from bk_kefuinfo where isorder=1 and in_time>='$post_start_date' and in_time<='$time_inss' and area='$area' and qudao_group_id='$qudaoid'";
+                    $sqls="select * from bk_kefuinfo where isorder=1 and in_time>='$post_start_date' and in_time<='$time_inss'  and qudao_group_id='$qudaoid'";
+                    
+                    $a1=count(M()->query($sql));
+                    
+                    
+                    $a2=count(M()->query($sqls));
+                    
+                    
+                    $str=round($a1/$a2,2)*100;
+                    
+                    $bfb=$str."%";
+                    
+                    echo  $bfb; </php></td>
+                <php> } </php>
+                <td>100%</td>
+              </tr>
+                </tbody>
+              
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/datepicker/js/jquery.datepicker.js"></script>
+<script>
+$(function(){
+$("#start_date,#en_date").datepicker();   
+})
+</script>
+</body>
+</html>

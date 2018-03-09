@@ -1,0 +1,77 @@
+<form class="form-horizontal" role="form">
+	<input type="hidden" id="id" value="{$id}"/>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="col-md-4 control-label">选择医生科室：</label>
+        <div class="col-md-3 xzdoc" style="width: 200px;">
+          <select name="doctors" id="doctors" class="form-control input-sm">
+            <option value="0">-请选择-</option>
+            <volist name="doctorsectionlist" id="data">
+              <option value="{$data.id}">{$data.name}</option>
+            </volist>
+          </select>
+        </div>
+        <div class="col-md-3 xzdocname" style="width: 200px;margin-left: 110px;">
+          <select name="doctor_section" id="doctor_section" class="form-control input-sm">
+          </select>
+        </div>
+      </div>
+      <div id="error_doctor"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" id="buttons_fz" class="btn btn-primary">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</form>
+      
+      
+<script>
+	$('#doctors').change(function() {
+		$('#error_doctor').empty();
+		$('#doctor_section').empty();
+		var section_val = $("#doctors").val();  
+		$.ajax({
+			type: 'POST',
+			url: "{:U('Index/fenzhen_ajax')}",
+			data: {
+				'section_val': section_val
+			},
+			dataType: 'json',
+			success: function(json) {
+				$("#doctor_section").empty();
+				var list = json.list;
+				var option = "";
+				$.each(list,
+				function(index, array) {
+					option += "<option value='" + array['id'] + "'>" + array['doctor_name'] + "</option>"
+				});
+				$("#doctor_section").append(option)
+			}
+		})
+	});
+	/**
+	 * 提交表单
+	 */
+	$("#buttons_fz").click(function() { 
+		var fzysksval = $('#doctors').val();
+		var id = $('#id').val();
+		if (fzysksval == 0) {
+			$('#error_doctor').empty();
+			var html = "<span>您没有选择，请选择!</span>";
+			$('#error_doctor').append(html)
+		} else {
+			var docval = $('#doctor_section').find("option:selected").text();
+			$.ajax({
+				type: 'POST',
+				url: "{:U('Index/fenzhen')}",
+				data: {
+					'docval': docval,
+					'id': id
+				},
+				complete: function() {
+					window.location.reload();
+				}
+			})
+		}
+	});
+</script>

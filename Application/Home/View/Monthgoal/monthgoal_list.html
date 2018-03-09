@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>__NAMEYY__预约管理系统</title>
+<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/css/metisMenu.css" rel="stylesheet">
+<link href="__PUBLIC__/css/sb-admin.css" rel="stylesheet">
+<link href="__PUBLIC__/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="__PUBLIC__/js/html5shiv.js"></script>
+<script src="__PUBLIC__/js/respond.min.js"></script>
+<![endif]-->
+<script>
+var delall_ajax="{:U('Monthgoal/delall_ajax')}";
+</script>
+</head>
+<body>
+<div id="wrapper"> <include file="Public:left" />
+  <div id="page-wrapper">
+  <include file="Public:position" />
+    <div class="container-fluid">
+      
+      <div class="row">
+        <div class="col-md-12 pd-10">
+          <div class="col-md-2 col-sm-6 col-xs-6 pd-5"><a class="btn btn-danger btn-block" onClick="datadel()"><i class="fa fa-trash-o"></i> 批量删除</a></div>
+          <div class="col-md-2 col-sm-6 col-xs-6 pd-5"><a class="btn btn-success btn-block" href="{:U('Monthgoal/monthgoal_add')}"><i class="fa fa-plus-square"></i> 添加目标</a></div>
+        </div>
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="text-center">
+                  <th><input type="checkbox" id="selectAll"></th>
+                  <th>ID</th>
+                  <th>目标月份</th>
+                  <th>目标数量</th>
+                  <th>完成率</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="monthgoallist" id="v">
+                  <tr class="text-center" id="tr_{$v.id}">
+                    <td><input type="checkbox" class="ckb" value="{$v.id}" name="monthgoal_id"></td>
+                    <td>{$v.id}</td>
+                    <td>{$v.yuefen}</td>
+                    <td>{$v.goalnum}</td>
+                    <td>{$v.wcl}{$v['wcl']==0? " ":"%"}</td>
+                    <td class="td-manage"><a title="编辑" href="{:U('Monthgoal/monthgoal_edit',array('id'=>$v['id']))}" class="editicon"><i class="fa fa-edit"></i> 编辑</a> <a title="删除"  rel="{$v.id}" href="{:U('Monthgoal/monthgoal_del',array('id'=>$v['id']))}" onClick="if(confirm('确定删除吗？')){ return true;}else{return false;}" class="delicon"><i class="fa fa-trash-o"></i> 删除</a></td>
+                  </tr>
+                </volist>
+              </tbody>
+            </table>
+          </div>
+          <div class="page">{$page}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script> 
+<script src="__PUBLIC__/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/js/metisMenu.js"></script> 
+<script src="__PUBLIC__/js/sb-admin-2.js"></script> 
+<script src="__PUBLIC__/js/delall.js"></script> 
+<script>
+	$("#selectAll").click(function(){
+		
+		var a = $(".ckb[type='checkbox']");
+		
+		if($(this).is(":checked"))
+		{
+			a.each(function(i){
+				$(this).prop("checked",true)
+			})
+		}
+		else
+		{
+			a.each(function(i){
+				$(this).prop("checked",false);
+			})
+		}
+	})	
+	
+</script>
+</body>
+</html>
